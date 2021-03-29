@@ -1,0 +1,53 @@
+Relations between collections.
+
+Event - User ( role === company )           1-N ( el evento tiene el ID del anunciante )
+Reservation - User ( role === client )      1-N ( la reserva tiene el ID del cliente )
+Reservation - Event                         1-N ( la reserva tiene el ID del evento )
+
+BONUS: Reviews 
+
+
+USER Inicialmente:
+    name, email, pass, totpSecret, role
+
+USER Segunda parte:
+    avatar
+
+
+
+EVENT Inicialmente: ( todos de tipo puntual )
+    name, description, date, price, capacity, bookings, city( solo la ciudad )
+
+EVENT Segunda parte: ( añadir tipo periódico )
+    location (coordenadas, mirar elproyecto de iron_events)
+    type
+    image
+    pack-lodge (name, description, image, location)
+    calendar[]:  ahora que hemos metido que la actividad puede ser periódica, tendremos muchas fechas disponibles.
+
+
+
+
+EVENTOS PERIÓDICOS:
+Los eventos en un principio los voy a hacer puntuales: x evento para la fecha xx/xx/xxxx
+
+Si meto la posibilidad de que un evento pueda ser periódico:
+Al meter un array de fechas, cada fecha tendrá su aforo y sus reservas. ( el aforo será igual para todos los días )
+Habrá que cambiar el modelo. EL evento ya no podrá tener un campo booking. 
+Si el calendar es un array, podemos hacer un objeto dentro del modelo event que sea un array con claves:
+
+calendar:{
+    date: {
+        type: Date,
+        required: 'Start date is required',
+        validate: {
+        validator: function (value) {
+            return moment().startOf('day').isBefore(moment(value))
+        },
+        message: props => `Starting must not be in the past`
+        }    
+    },
+    booking: {
+        type: number
+    }
+}

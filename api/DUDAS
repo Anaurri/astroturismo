@@ -1,0 +1,30 @@
+
+EVENTOS PERIÓDICOS:
+Los eventos en un principio los voy a hacer puntuales: x evento para la fecha xx/xx/xxxx
+
+Si meto la posibilidad de que un evento pueda ser periódico:
+Al meter un array de fechas, cada fecha tendrá su aforo y sus reservas. 
+Habrá que cambiar el modelo. EL evento ya no podrá tener un campo capacity y un campo booking.
+Si el calendar es un array, podemos hacer un objeto dentro del modelo event que sea un array con claves:
+
+    calendar [
+        {
+            date: 10-enero-2021 
+            capacity: 200 personas
+            booking: 16 
+        },
+        {
+            date: 10-diciembre-2021 
+            capacity: 200 personas
+            booking: 0 
+        },
+        {
+            date: 10-agosto-2021 
+            capacity: 200 personas
+            booking: 156 
+        }
+
+    ]
+        
+
+    }

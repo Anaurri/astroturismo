@@ -1,0 +1,44 @@
+NPM package:
+
+ "scripts": {
+    "start": "node ./app.js",
+    "dev": "PORT=3001 DEBUG=api:* nodemon ./app.js",
+    "seeds": "node ./bin/seeds.js",
+    "test": "jest"
+  },
+devDependencies
+    jest, mongodb-memory-server, nodemon, supertest
+  
+dependencies: bcrypt, connect-mongo, cors, debug, dotenv, express, express-session, http-errors,
+            moment, mongoose, morgan, passport, passport-local, totp-generator
+
+
+
+npm init
+npm i --save-dev nodemon
+npm i --save express
+npm i mongoose 
+npm i bcrypt
+npm i totp-generator
+
+
+
+.gitignore ( nodemodules , .env )
+
+
+Structure API:
+
+bin (seeds.js)
+config                                  ( cors.config.js, db.config.js, passport.config.js, routes.config.js, session.config.js )
+controllers                             ( xxxx.controllers.js )
+data                                    ( xxx.json )
+middlewares                             ( secure.middleware.js)
+models                                  ( xxxx.model.js )
+node_modules
+postman                                 ( collection.json , enviroment.json )
+test
+gitignore
+app.js
+jest-config.js
+package-lock.json
+package.json
