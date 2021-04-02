@@ -1,0 +1,14 @@
+{
+	"id": "f6d9a0af-6436-4823-a6a8-3a8b7bdd9e2e",
+	"name": "Astroturismo",
+	"values": [
+		{
+			"key": "BASE_API_URL",
+			"value": "http://localhost:3001/api",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-03-31T18:06:38.444Z",
+	"_postman_exported_using": "Postman/8.0.7"
+}

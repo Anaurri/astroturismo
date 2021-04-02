@@ -20,6 +20,15 @@ npm i --save express
 npm i mongoose 
 npm i bcrypt
 npm i totp-generator
+npm i http-errors
+
+
+//para la sesión:
+npm i passport
+npm i passport-local
+npm i express-session
+npm i connect-mongo
+
 
 
 

@@ -31,11 +31,14 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
+        required: 'Are you a company?',
         enum: ['admin', 'client', 'company'],
         default: 'client'
     }
 }, {
     timestamps: true,
+
+    /*Para el postman: son métodos de la clase Hash para poder usar el postman y que no falle*/
     toJSON: {
         transform: (doc, ret) => {
             ret.id = doc._id;
