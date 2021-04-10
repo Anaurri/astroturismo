@@ -1,12 +1,12 @@
+require('dotenv').config();
+const express = require('express');
 const mongoose = require('mongoose');
 const createError = require('http-errors');
-
-const express = require('express');
+const logger = require('morgan'); //para que me pinte los logs 
 const passport = require('passport');
-
 require('./config/passport.config');
 require('./config/db.config');
-// const session = require('./config/session.config');
+const session = require('./config/session.config');
 
 
 
@@ -16,10 +16,12 @@ console.log ('hola')
 
 /** Middlewares */
 app.use(express.json());
-// app.use(session);
+app.use(logger('dev'));
+
+app.use(session);
 
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 
 /** Configure routes */
 const router = require('./config/routes.config')

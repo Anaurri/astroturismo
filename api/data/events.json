@@ -1,0 +1,67 @@
+[
+    {
+      "name": "Observación de perseidas",
+      "company": "noches.estrelladas@example.com",
+      "description": "Obeservación de perseidas con guía y telescopio muy cerca de Segovia",
+      "tags": ["Perseidas","Segovia"],
+      "lodge": "",
+      "location":{
+        "coordinates": [
+          41,
+          -2
+        ]
+    },
+      "date": "03/01/2026",
+      "duration": "90",
+      "capacity": 15,
+      "booking": 8,
+      "price": 10,
+      "meetingPoint": [
+        41,
+        -2
+      ]
+    },
+    {
+        "name": "Avistamiento eclipse lunar del próximo mes de agosto",
+        "company": "turismo@segovia.com",
+        "description": "Ven a ver junto a nuestro guía Ramón el esperado eclipse de luna",
+        "tags": ["Eclipse","Luna", "Valencia"],
+        "lodge": "",
+        "location":{
+          "coordinates": [
+            41,
+            -2
+          ]
+      },
+        "date": "03/08/2026",
+        "duration": "120",
+        "capacity": 30,
+        "booking": 29,
+        "price": 5,
+        "meetingPoint": [
+          41,
+          -2
+        ]
+      },
+      {
+        "name": "Observación de contelaciones",
+        "company": "aprendiendo.estrellas@example.org",
+        "description": "Excursión al Cerro del Puerco.La excursión incluye un picnic de embutido y vino de la zona para cenar y la explicación y observación de las constelaciones a través de telescopio a manos del guía. ",
+        "tags": ["Constelaciones","Segovia", "La Granja de San Ildefonso"],
+        "lodge": "https://puertadelcampo.es/",
+        "location":{
+          "coordinates": [
+            41,
+            -2
+          ]
+      },
+        "date": "03/07/2026",
+        "duration": "240",
+        "capacity": 10,
+        "price": 30,
+        "meetingPoint": [
+          41,
+          -2
+        ]
+      }
+]

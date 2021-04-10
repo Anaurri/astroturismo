@@ -1,0 +1,31 @@
+PORTAL QUE OFRECE EXPERIENCIAS Y GUÍAS ASTRONÓMICAS POR TODA ESPAÑA
+
+Las empresas/guias individuales añaden sus servicios.
+Los clientes reservan y pagan los productos. Una vez comprado el producto se le ofrece alojamiento ( API externa de alojamientos (booking?)
+
+
+Los productos podrán ser puntuales( avistamiento de cometas, eclipse....) o periódicos ( observación de constelaciones, excursión observatorios...)
+Al poder tener productos periódicos --> habrá calendario. 
+LOs productos pueden ser pack experiencia+alojamiento ( al comprar este pack , no salta la api externa de booking )
+
+
+El portal tendrá búsqueda en mapa y en barra de búsqueda en el listado principal
+Tambien hay vista detail del producto.
+
+
+Reviews.
+
+
+VISTAS:
+
+navbar
+footer
+
+Login
+Register
+EventForm ( solo accesible por role: company )
+Main page. : ListOfEvents , Map , (calendar?)
+EventDetail 
+Política de cookies etc etc...
+Update Profile ( solo accesible por role: company )
+Reviews

@@ -1,0 +1,38 @@
+
+https://mongoosejs.com/docs/geojson.html
+
+Las coorenadas viene en GeoJSON y va primero la LONGITUD Y luego la LATITUD ( al contrario q normalmente )
+
+En el SCHEMA:
+
+
+const citySchema = new mongoose.Schema({
+  name: String,
+  location: {
+    type: {
+      type: String, // Don't do `{ location: { type: String } }`
+      enum: ['Point'], // 'location.type' must be 'Point'
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  }
+});
+
+
+En el formulario:
+
+
+
+Y al crear , debemos transformarlo a :
+
+
+{
+  "type" : "Point",
+  "coordinates" : [
+    -122.5,
+    37.7
+  ]
+}

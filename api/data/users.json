@@ -1,0 +1,39 @@
+[
+    {
+      "name": "Ana Urrialde",
+      "email": "anaurrig@gmail.com",
+      "password": "12345678",
+      "role": "admin"
+    },
+    {
+      "name": "Noches estrelladas",
+      "email": "noches.estrelladas@example.com",
+      "password": "12345678",
+      "role": "company"
+    },
+    {
+      "name": "Turismo Segovia",
+      "email": "turismo@segovia.com",
+      "password": "12345678",
+      "role": "company"
+    },
+    {
+      "name": "Experiencia geláctica",
+      "email": "galactica.madrid@example.org",
+      "password": "12345678",
+      "role": "company"
+    },
+    {
+      "name": "Aprendiendo de las estrellas",
+      "email": "aprendiendo.estrellas@example.org",
+      "password": "12345678",
+      "role": "company"
+    },
+    {
+      "name": "Perico Palotes",
+      "email": "perico.palotes@example.org",
+      "password": "12345678",
+      "role": "client"
+    }
+  ]
+  
