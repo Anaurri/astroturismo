@@ -57,14 +57,13 @@ module.exports.detail = (req, res, next) => {
 module.exports.delete = (req, res, next) => {
     Reservation.findById(req.params.id)
       .then(reservation => {
-        // const today =  moment().format('DD/MM/YYYY HH:mm');
-        // const dayAfer2mrw = today
 
-        const today = new Date();
-        const dayAfer2mrw = new Date().setDate(today.getDate()+2)
+        const today = new Date(); //hoy en ms desde 1970
+        const dayAfer2mrw = new Date().setDate(today.getDate()+2) //hoy+2días  en ms desde 1970 
+        const reservationDate = reservation.date.getTime() //día de la reserva en ms desde 1970
         if (!reservation) next(createError(404, 'Reservation not found'))
         else if (reservation.client != req.user.id) next(createError(403, 'Only the owner of the reservation can perform this action'))
-        else if (reservation.date.getTime() < dayAfer2mrw) next(createError(403, 'The reservation cannot be canceled two days before of the event'))
+        else if (reservationDate < dayAfer2mrw) next(createError(403, 'The reservation cannot be canceled two days before of the event'))
         else return reservation.delete()
           .then(() => res.status(204).end())  /*Tengo que devolver algo para que acabe la petición. En este caso ,
           no queremos devolver un json. EN su lugar , devolveremos un .end*/
