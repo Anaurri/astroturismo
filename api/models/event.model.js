@@ -65,22 +65,16 @@ const eventSchema = new Schema ({
         default: 0
     }
     // ,
-    // meetingPoint: {
+    // // meetingPoint: {
     //     type: {
-    //       type: String,
-    //       enum: ['Point'],
-    //       default: 'Point'
-    //     },
-    //     coordinates: {
-    //       type: [Number],
-    //       default: void 0,
-    //       validate: {
-    //         validator: function([lng, lat]) {
-    //           return isFinite(lng) && isFinite(lat) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
-    //         },
-    //         message: props => `Invalid location coordinates`
+    //         type: String,
+    //         enum: ['Point'],
+    //         default: 'Point'
+    //       },
+    //       coordinates: {
+    //         type: [Number],
+    //         required: 'The location of the event is required',
     //       }
-    //     }
     // },
 } , {
     timestamps: true,
