@@ -38,38 +38,38 @@ module.exports.createNotice = (req, res, next) => {
             }
         })
         .then(notification => {
-            console.log(notification)
             /*Buscamos las reservas del usuario y comprobamos la fecha*/
             return Reservation.find({ client: req.user.id })
                 .then(reservations => {
-                    console.log (reservations)
+                    console.log(reservations.length)
                     if (reservations.length = 0) next(createError(404, 'Reservation not found'))
                     else {
                         const today = new Date();
                         const dayAfer2mrw = new Date().setDate(today.getDate() + 2)
-                        console.log(reservations)
-
-                        const promises = reservations.map(reservation => {
-
-                            console.log(reservation)
-
+                        const notifications = reservations.map(reservation => {
                             const reservationDate = reservation.date.getTime()
-                            if(reservationDate < dayAfer2mrw) {
+                            console.log(reservationDate)
+                            console.log(dayAfer2mrw)
 
+                            if (reservationDate < dayAfer2mrw) {
+                                console.log("reservationDate")
+
+                                console.log(reservationDate)
                                 notification.event = reservation.event
+                                console.log("notification")
+
                                 console.log(notification)
-                                Notification.create(notification)
-                                    .then(() => res.status(201).json(notification))
-                                    .catch(error => {
-                                        console.log(error)
-                                        next(error);
-                                    })
+                                return Notification.create(notification)
                             }
-                            else (console.log("traza else"))
                         })
-                        Promise.all(promises).then(console.log, console.error)
-                        return res.status(201).json(promises)
+                        return Promise.all(promises)
+                            .then((promises) => {
+                                return res.json({ reservations , notifications }) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
+
+                            })
                     }
+
                 })
         })
+        .catch(next)
 }

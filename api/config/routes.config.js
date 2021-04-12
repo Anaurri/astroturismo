@@ -36,7 +36,9 @@ router.get('/reservations', secure.isAuthenticated, reservationController.list);
 router.get('/reservations/:id', secure.isAuthenticated, reservationController.detail);  //Postman FAIL POPULATE and 404
 router.delete('/reservations/:id', secure.isAuthenticated, reservationController.delete);
 
-router.post('/notifications/notices', secure.isAuthenticated  , notificationsController.createNotice); 
+router.post('/notifications/notices', notificationsController.createNotice); 
+router.post('/notifications/message', secure.isAuthenticated  , notificationsController.createMessage); 
+
 
 
 module.exports = router;
