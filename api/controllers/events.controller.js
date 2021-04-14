@@ -50,16 +50,18 @@ module.exports.update = (req, res, next) => {
       const today = new Date(); //hoy en ms desde 1970
       const threeDays = new Date().setDate(today.getDate() + 3) //hoy+3días  en ms desde 1970 
       const eventDate = event.date.getTime() //día de la reserva en ms desde 1970
-      console.log(event.company)
       if (!event) next(createError(404, 'Event not found'))
       else if (event.company != req.user.id) next(createError(403, 'Only the company of the event can perform this action'))
       else if (eventDate < threeDays) next(createError(403, 'The company cannot be update three days before of the event'))
       else {
-        const updateInfo = {description, date, city, capacity, price} = req.body  /*Capamos la info que puede actualizarse.ESta línea de código crea un nuevo objeto con las claves que indicamos entre {} y los valores de req.body d esas claves*/
-        /*No tenemos que volver a acceder a mongo para actualizar (findByIdAndUpdate),ya tenemos el evento. Con Object.assign y event.save() lo podemos actualizar.*/
-        Object.assign(event, updateInfo)  /*al primer objeto le asignolas claves dle segundo*/
-        console.log (event)
-        console.log (updateInfo)
+        // const updateInfo = {date, city, capacity} = req.body  /*Capamos la info que puede actualizarse.ESta línea de código crea un nuevo objeto con las claves que indicamos entre {} y los valores de req.body d esas claves*/
+        // /*No tenemos que volver a acceder a mongo para actualizar (findByIdAndUpdate),ya tenemos el evento. Con Object.assign y event.save() lo podemos actualizar.*/
+        // Object.assign(event, updateInfo)  /*al primer objeto le asignolas claves dle segundo*/
+        ["date", "capacity", "city", "price"].forEach(field => {
+          if (req.body[field]) {
+            event[field] = req.body[field]
+          }
+        })
         return event.save()               /*TODA PROMESA QUE ANIDADA EN OTRA Y QUIERA COMPARTIR EL CATCH CON ELLA, TIENEN QUE DEVOLVERSE CON EL RETURN*/
           .then((eventUpdate) => {
             /*Creamos las notificaciones para los usuarios*/
@@ -75,9 +77,9 @@ module.exports.update = (req, res, next) => {
               }
               return Notification.create(notification) /*Aqui no creamos las notificaciones. SOlo creamoS la query , y cuando pongamos el .then en el Promise.all será cuando se creen en BBDD. EL return de esta línea es por el map*/
             })
-            return Promise.all(promises) /*TODA PROMESA QUE ANIDADA EN OTRA Y QUIERA COMPARTIR EL CATCH CON ELLA, TIENEN QUE DEVOLVERSE CON EL RETURN*/
-              .then((promises) => {
-                /* El notifications no necesita clave:valor si es el mismo nombre notifications:notifications */
+            return Promise.all(notifications) /*TODA PROMESA QUE ANIDADA EN OTRA Y QUIERA COMPARTIR EL CATCH CON ELLA, TIENEN QUE DEVOLVERSE CON EL RETURN*/
+              .then((notifications) => {
+                /* El notifications no necesita clave:valor si es el mismo nombre*/
                 return res.json({ event: eventUpdate , notifications }) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
               })
           })

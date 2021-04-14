@@ -29,47 +29,35 @@ module.exports.createNotice = (req, res, next) => {
     User.findOne({ role: 'admin' })
         .then(user => {
             console.log(user)
-            return notification = {
-                sender: user.id,
-                receiver: req.user.id,
-                date: new Date(),
-                typeOfNotification: 'notice',
-                textNotification: 'Quedan dos días para el evento'
-            }
-        })
-        .then(notification => {
-            /*Buscamos las reservas del usuario y comprobamos la fecha*/
-            return Reservation.find({ client: req.user.id })
+            const today = new Date();
+            const dayAfer2mrw = new Date().setDate(today.getDate() + 2)
+            /*Buscamos las reservas por usuario y por fecha (a dos días del evento) */
+            return Reservation.find({ $and: [{ client: req.user.id }, { date: { $lte: dayAfer2mrw } }] })
                 .then(reservations => {
                     console.log(reservations.length)
                     if (reservations.length = 0) next(createError(404, 'Reservation not found'))
                     else {
-                        const today = new Date();
-                        const dayAfer2mrw = new Date().setDate(today.getDate() + 2)
                         const notifications = reservations.map(reservation => {
-                            const reservationDate = reservation.date.getTime()
-                            console.log(reservationDate)
-                            console.log(dayAfer2mrw)
-
-                            if (reservationDate < dayAfer2mrw) {
-                                console.log("reservationDate")
-
-                                console.log(reservationDate)
-                                notification.event = reservation.event
-                                console.log("notification")
-
-                                console.log(notification)
-                                return Notification.create(notification)
+                            notification = {
+                                sender: user.id,
+                                receiver: req.user.id,
+                                date: new Date(),
+                                typeOfNotification: 'notice',
+                                textNotification: 'Quedan dos días para el evento',
+                                event: reservation.event
                             }
+                            console.log(reservationDate)
+                            console.log("notification")
+                            console.log(notification)
+                            return Notification.create(notification)
                         })
-                        return Promise.all(promises)
-                            .then((promises) => {
-                                return res.json({ reservations , notifications }) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
-
-                            })
+                        return Promise.all(notifications)
+                        .then((notifications) => {
+                            return res.json({ notifications }) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
+                        })
                     }
 
+
                 })
-        })
-        .catch(next)
+        }).catch(next)
 }

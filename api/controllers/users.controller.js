@@ -9,6 +9,9 @@ module.exports.register = (req, res, next) => {
       if (user) {
         next(createError(400, { errors: { email: 'This email already exists' } }))
       } else {
+        if (req.body.role = 'company') {
+          req.body.contactEmail = req.body.contactEmail //EL email de contacto es requerido. Por defecto ponemos el mismo mail de la app , pero este contactEmail se va a poder actualizar luego
+        }
         return User.create(req.body)
           .then(user => res.status(201).json(user))
       }
@@ -43,6 +46,15 @@ module.exports.list = (req, res, next) => {
     .then(users => res.json(users))
     .catch(next)
 }
+module.exports.view = (req, res, next) => {
+  User.findById(req.user.id)
+    .then(user => {
+      if (!user) next(createError(404, 'User not found'))
+      else if (user.id != req.user.id) next(createError(403, 'Forbidden'))
+      else res.json(user)
+    })
+    .catch(next)
+}
 
 module.exports.detail = (req, res, next) => {
   User.findById(req.params.id)
@@ -54,9 +66,28 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.update = (req, res, next) => {
-  const { id } = req.params;
-
-  User.findByIdAndUpdate(id, req.body, { new: true })
+  const body = {
+    id: req.user.id
+  }
+  if (req.body.name){
+    body.name = req.body.name
+  }
+  if (req.body.description){
+    body.description = req.body.description
+  }
+  if (req.body.phone){
+    body.phone = req.body.phone
+  }
+  if (req.body.contactEmail){
+    body.contactEmail = req.body.contactEmail
+  }
+  if (req.body.avatar){
+    body.avatar = req.body.avatar
+  }
+  if (req.body.city){
+    body.city = req.body.city
+  }
+  User.findByIdAndUpdate(req.user.id, body, { new: true })
     .then(user => res.status(202).json(user))
     .catch(next)
 }

@@ -16,6 +16,21 @@ const userSchema = new Schema({
         required: 'A valid email is required',
         match: [EMAIL_PATTERN, 'the email is invalid']
     },
+    description: { /*Solo habrá description si el role===company*/ 
+        type: String,
+    },
+    phoneNumber: { /*Solo habrá phoneNumber si el role===company*/ 
+        type: String,
+    },
+    contactEmail: { /*Solo habrá contactEmail si el role===company*/ 
+        unique: true, 
+        type: String,
+        required: 'A valid email is required',
+        match: [EMAIL_PATTERN, 'the email is invalid']
+    },
+    city: { /*Solo habrá city si el role===company*/ 
+        type: String,
+    },
     totpSecret: {
         type: String,
         required: true,
@@ -34,7 +49,11 @@ const userSchema = new Schema({
         required: 'Are you a company?',
         enum: ['admin', 'client', 'company'],
         default: 'client'
-    }
+    },
+    avatar: {
+        type: String,
+        default: `https://res.cloudinary.com/anthillweb/image/upload/v1613921232/users-avatars/Flik_gyce2o.png`
+      }
 }, {
     timestamps: true,
 
