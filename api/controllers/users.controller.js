@@ -9,9 +9,8 @@ module.exports.register = (req, res, next) => {
       if (user) {
         next(createError(400, { errors: { email: 'This email already exists' } }))
       } else {
-        if (req.body.role = 'company') {
-          req.body.contactEmail = req.body.contactEmail //EL email de contacto es requerido. Por defecto ponemos el mismo mail de la app , pero este contactEmail se va a poder actualizar luego
-        }
+        req.body.contactEmail = req.body.contactEmail //EL email de contacto es requerido. Por defecto ponemos el mismo mail de la app , pero este contactEmail se va a poder actualizar luego
+
         return User.create(req.body)
           .then(user => res.status(201).json(user))
       }
@@ -70,24 +69,25 @@ module.exports.update = (req, res, next) => {
   const body = {
     id: req.user.id
   }
-  if (req.body.name){
+  if (req.body.name) {
     body.name = req.body.name
   }
-  if (req.body.description){
+  if (req.body.description) {
     body.description = req.body.description
   }
-  if (req.body.phone){
+  if (req.body.phone) {
     body.phone = req.body.phone
   }
-  if (req.body.contactEmail){
+  if (req.body.contactEmail) {
     body.contactEmail = req.body.contactEmail
   }
-  if (req.body.avatar){
-    body.avatar = req.body.avatar
-  }
-  if (req.body.city){
+  if (req.body.city) {
     body.city = req.body.city
   }
+  if (req.file) {
+    body.avatar = req.file.url
+  }
+
   User.findByIdAndUpdate(req.user.id, body, { new: true })
     .then(user => res.status(202).json(user))
     .catch(next)
