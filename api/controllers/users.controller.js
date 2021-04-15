@@ -38,7 +38,8 @@ module.exports.login = (req, res, next) => {
 module.exports.logout = (req, res, next) => {
   req.logout();
 
-  res.status(204).end()
+  res.status(204).end()/*Tengo que devolver algo para que acabe la petición. En este caso ,
+  no queremos devolver un json. EN su lugar , devolveremos un .end*/
 }
 
 module.exports.list = (req, res, next) => {

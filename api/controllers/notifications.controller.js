@@ -4,21 +4,46 @@ const createError = require('http-errors');
 const Notification = require('../models/notification.model')
 const User = require('../models/user.model')
 const Reservation = require('../models/reservation.model')
+const Event = require('../models/event.model')
+
 
 
 
 /*Este mensaje será cliente-comàñia o viceversa. El mensaje lo generan ellos en un formulario*/
 module.exports.createMessage = (req, res, next) => {
     req.body.sender = req.user.id;
-    req.body.date = new Date();
+    req.body.date = new Date().getDate;
     req.body.typeOfNotification = 'message'
+    req.body.titleNotification= "You have a message"
 
-    Notification.create(req.body)
-        .then(notification => res.status(201).json(notification))
-        .catch(error => {
-            console.log(error)
-            next(error);
-        })
+
+    console.log (req.body.event)
+
+    /*Si no esta informado el reciver, le damos el id de company*/
+    if (req.body.recipient == null) {
+        return Event.findById(req.body.event)
+            .then(event => {
+                if (event) {
+                    req.body.recipient = event.company
+                    console.log (req.body)
+                    return Notification.create(req.body)
+                        .then(notification => res.status(201).json(notification))
+                        .catch(error => {
+                            console.log(error)
+                            next(error);
+                        })
+                }
+                else next(createError(404, 'Event not found'))
+            })
+    }
+    else {
+        Notification.create(req.body)
+            .then(notification => res.status(201).json(notification))
+            .catch(error => {
+                console.log(error)
+                next(error);
+            })
+    }
 }
 
 /*Lo genera el servidor.¿ cuándo ? Se podría hacer al iniciar sesión. Cuando el usuario pulsa en notificaciones ,se podría recorrer las reservas del usu y
@@ -27,8 +52,7 @@ Tendría que ver cómo hacer que solo se genere una notificacion : podría ser s
 module.exports.createNotice = (req, res, next) => {
     /*Buscamos el ID del admin. Se supone q nunca va a cambiar, pero lo buscamos por si a caso*/
     User.findOne({ role: 'admin' })
-        .then(user => {
-            console.log(user)
+        .then(admin => {
             const today = new Date();
             const dayAfer2mrw = new Date().setDate(today.getDate() + 2)
             /*Buscamos las reservas por usuario y por fecha (a dos días del evento) */
@@ -39,22 +63,21 @@ module.exports.createNotice = (req, res, next) => {
                     else {
                         const notifications = reservations.map(reservation => {
                             notification = {
-                                sender: user.id,
+                                sender: admin.id,
                                 receiver: req.user.id,
                                 date: new Date(),
                                 typeOfNotification: 'notice',
-                                textNotification: 'Quedan dos días para el evento',
-                                event: reservation.event
-                            }
-                            console.log(reservationDate)
-                            console.log("notification")
-                            console.log(notification)
+                                textNotification: 'There are two days left for the event',
+                                event: reservation.event,
+                                titleNotification: "The event is very close!!!"
+
+                            }            
                             return Notification.create(notification)
                         })
                         return Promise.all(notifications)
-                        .then((notifications) => {
-                            return res.json({ notifications }) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
-                        })
+                            .then((notifications) => {
+                                return res.json({ notifications }) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
+                            })
                     }
 
 

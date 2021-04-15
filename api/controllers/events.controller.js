@@ -73,7 +73,9 @@ module.exports.update = (req, res, next) => {
                 sender: req.user.id,
                 recipient: reservation.client,
                 date: today,
-                textNotification: req.body.textNotification
+                textNotification: req.body.textNotification,
+                titleNotification: "The event has been updated"
+
               }
               return Notification.create(notification) /*Aqui no creamos las notificaciones. SOlo creamoS la query , y cuando pongamos el .then en el Promise.all será cuando se creen en BBDD. EL return de esta línea es por el map*/
             })
@@ -93,7 +95,26 @@ module.exports.delete = (req, res, next) => {
       if (!event) next(createError(404, 'Event not found'))
       else if (event.company != req.user.id) next(createError(403, 'Only the company of the event can perform this action'))
       else return event.delete()
-        .then(() => res.status(204).end())  /*Tengo que devolver algo para que acabe la petición. En este caso ,
-        no queremos devolver un json. EN su lugar , devolveremos un .end*/
+      .then(() => {
+        /*Creamos las notificaciones para los usuarios*/
+        /*De cada reserva cogemos el Id del cliente para crear un mensaje con el Id recipient = Id client*/
+        const notifications = event.reservations.map(reservation => {
+          const notification = {
+            typeOfNotification: 'alert',
+            event: req.params.id,
+            sender: req.user.id,
+            recipient: reservation.client,
+            date: today,
+            textNotification: req.body.textNotification,
+            titleNotification: "The event has been canceled"
+          }
+          return Notification.create(notification) /*Aqui no creamos las notificaciones. SOlo creamoS la query , y cuando pongamos el .then en el Promise.all será cuando se creen en BBDD. EL return de esta línea es por el map*/
+        })
+        return Promise.all(notifications) /*TODA PROMESA QUE ANIDADA EN OTRA Y QUIERA COMPARTIR EL CATCH CON ELLA, TIENEN QUE DEVOLVERSE CON EL RETURN*/
+          .then((notifications) => {
+            /* El notifications no necesita clave:valor si es el mismo nombre*/
+            return res.json(notifications) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
+          })
+      })
     }).catch(next)
 }

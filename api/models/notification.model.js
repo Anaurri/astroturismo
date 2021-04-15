@@ -26,8 +26,12 @@ const notificationSchema = new Schema ({
     },
     textNotification: {
         type: String,
-        required: 'An description is required',
+        required: 'A description is required',
         minLength: [10, 'Description needs at least 10 characters']
+    },
+    titleNotification: {
+        type: String,
+        required: 'A title is required',
     }
 })
 
