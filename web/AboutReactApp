@@ -1,0 +1,37 @@
+desde la raíz del proyecto 
+npx create-react-app web
+
+
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+
+
+
+  
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.1"
+  },
+
+  FALTARÍAN:
+
+    "dependencies": {
+    "axios": "^0.21.1",
+    "i18next": "^20.2.1",
+    "moment": "^2.29.1",
+    "react-i18next": "^11.8.12",
+    "react-router-dom": "^5.2.0",
+  },
+
+
+index.js : Apenas se toca. Solo cuando instalemos el in tenemos que añadirlo en el index.js
+import './services/i18n-service'; // init i18n system

@@ -6,6 +6,7 @@ const logger = require('morgan'); //para que me pinte los logs
 const passport = require('passport');
 require('./config/passport.config');
 require('./config/db.config');
+const cors = require('./config/cors.config');
 const session = require('./config/session.config');
 
 
@@ -17,7 +18,7 @@ console.log ('hola')
 /** Middlewares */
 app.use(express.json());
 app.use(logger('dev'));
-
+app.use(cors);
 app.use(session);
 
 app.use(passport.initialize());

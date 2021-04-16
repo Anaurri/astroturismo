@@ -29,6 +29,10 @@ npm i express-session
 npm i connect-mongo
 
 npm i moment
+npm i multer
+npm i multer-storage-cloudinary  --> mejor la versión : "multer-storage-cloudinary": "~2.2.1",
+npm i cloudinary
+npm i cors ( para que nuestra web le pueda mandar peticiones al servidor )
 
 
 
