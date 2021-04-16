@@ -22,8 +22,8 @@ router.get('/users', secure.checkRole('admin'), usersController.list) //Postman 
 router.get('/users/:id', secure.checkRole('admin'), usersController.detail) //Postman ok  /* Solo el admin puede acceder a la lista de usuarios*/
 
 router.get('/events', eventsController.list); //Postman ok
-router.post('/events', secure.checkRole('company'), upload.single('image'), eventsController.create); //Postman ok
 router.get('/events/:id', eventsController.detail); //Postman ok
+router.post('/events', secure.checkRole('company'), upload.single('image'), eventsController.create); //Postman ok
 router.patch('/events/:id', secure.isAuthenticated, upload.single('image'), eventsController.update); //Postman ok
 router.delete('/events/:id', secure.isAuthenticated, eventsController.delete); //Postman ok
 
