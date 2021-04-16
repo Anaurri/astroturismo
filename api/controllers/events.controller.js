@@ -28,6 +28,9 @@ module.exports.create = (req, res, next) => {
   //   coordinates: location
   // }
   req.body.company = req.user.id;
+  if (req.file) {
+    req.body.image = req.file.url
+  }
 
   Event.create(req.body)
     .then(event => res.status(201).json(event))
@@ -42,6 +45,10 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.update = (req, res, next) => {
+  console.log("traza")
+
+  console.log(req.file)
+
   //desde react: El submit que llamará a este endpoint, se habilitará cuando rellene tambien la notificación con la alerta informada de que se ha cambiado el evento para enviarselo a  los usuarios.
   Event.findById(req.params.id)
     .populate('reservations') //el mongoose no te trae el virtual por defecto si no se lo pides porque cuesta. De ahí el populate.
@@ -61,6 +68,11 @@ module.exports.update = (req, res, next) => {
           if (req.body[field]) {
             event[field] = req.body[field]
           }
+          /* miramos si nos ha llegado algun fichero para actualizarla imagen*/
+          if (req.file) {
+            event.image = req.file.url
+          }
+
         })
         return event.save()               /*TODA PROMESA QUE ANIDADA EN OTRA Y QUIERA COMPARTIR EL CATCH CON ELLA, TIENEN QUE DEVOLVERSE CON EL RETURN*/
           .then((eventUpdate) => {
@@ -82,7 +94,7 @@ module.exports.update = (req, res, next) => {
             return Promise.all(notifications) /*TODA PROMESA QUE ANIDADA EN OTRA Y QUIERA COMPARTIR EL CATCH CON ELLA, TIENEN QUE DEVOLVERSE CON EL RETURN*/
               .then((notifications) => {
                 /* El notifications no necesita clave:valor si es el mismo nombre*/
-                return res.json({ event: eventUpdate , notifications }) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
+                return res.json({ event: eventUpdate, notifications }) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
               })
           })
       }
@@ -95,26 +107,26 @@ module.exports.delete = (req, res, next) => {
       if (!event) next(createError(404, 'Event not found'))
       else if (event.company != req.user.id) next(createError(403, 'Only the company of the event can perform this action'))
       else return event.delete()
-      .then(() => {
-        /*Creamos las notificaciones para los usuarios*/
-        /*De cada reserva cogemos el Id del cliente para crear un mensaje con el Id recipient = Id client*/
-        const notifications = event.reservations.map(reservation => {
-          const notification = {
-            typeOfNotification: 'alert',
-            event: req.params.id,
-            sender: req.user.id,
-            recipient: reservation.client,
-            date: today,
-            textNotification: req.body.textNotification,
-            titleNotification: "The event has been canceled"
-          }
-          return Notification.create(notification) /*Aqui no creamos las notificaciones. SOlo creamoS la query , y cuando pongamos el .then en el Promise.all será cuando se creen en BBDD. EL return de esta línea es por el map*/
-        })
-        return Promise.all(notifications) /*TODA PROMESA QUE ANIDADA EN OTRA Y QUIERA COMPARTIR EL CATCH CON ELLA, TIENEN QUE DEVOLVERSE CON EL RETURN*/
-          .then((notifications) => {
-            /* El notifications no necesita clave:valor si es el mismo nombre*/
-            return res.json(notifications) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
+        .then(() => {
+          /*Creamos las notificaciones para los usuarios*/
+          /*De cada reserva cogemos el Id del cliente para crear un mensaje con el Id recipient = Id client*/
+          const notifications = event.reservations.map(reservation => {
+            const notification = {
+              typeOfNotification: 'alert',
+              event: req.params.id,
+              sender: req.user.id,
+              recipient: reservation.client,
+              date: today,
+              textNotification: req.body.textNotification,
+              titleNotification: "The event has been canceled"
+            }
+            return Notification.create(notification) /*Aqui no creamos las notificaciones. SOlo creamoS la query , y cuando pongamos el .then en el Promise.all será cuando se creen en BBDD. EL return de esta línea es por el map*/
           })
-      })
+          return Promise.all(notifications) /*TODA PROMESA QUE ANIDADA EN OTRA Y QUIERA COMPARTIR EL CATCH CON ELLA, TIENEN QUE DEVOLVERSE CON EL RETURN*/
+            .then((notifications) => {
+              /* El notifications no necesita clave:valor si es el mismo nombre*/
+              return res.json(notifications) //Solo puede haber un res.json en todo el endpoint. Si no ponenmos el res.status , por defecto es 200.
+            })
+        })
     }).catch(next)
 }

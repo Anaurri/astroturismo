@@ -2,7 +2,7 @@ const moment = require('moment');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const eventSchema = new Schema ({
+const eventSchema = new Schema({
     name: {
         type: String,
         required: 'An user name is required'
@@ -16,6 +16,22 @@ const eventSchema = new Schema ({
         type: String,
         required: 'An description is required',
         minLength: [10, 'Description needs at least 10 characters']
+    },
+    image: {
+        type: String,
+        required: 'Image is required',
+        default: `https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_7_zmithl.png`,
+        validate: {
+            validator: function (value) {
+                try {
+                    const url = new URL(value);
+                    return url.protocol === 'http:' || url.protocol === 'https:'
+                } catch (error) {
+                    return false;
+                }
+            },
+            message: props => `Invalid image URL`
+        }
     },
     tags: [String],
 
@@ -31,24 +47,24 @@ const eventSchema = new Schema ({
     },
     location: {
         type: {
-          type: String,
-          enum: ['Point'],
-          default: 'Point'
+            type: String,
+            enum: ['Point'],
+            default: 'Point'
         },
         coordinates: {
-          type: [Number],
-          required: 'The location of the event is required',
+            type: [Number],
+            required: 'The location of the event is required',
         }
-      },
+    },
     date: {
         type: Date,
         required: 'Date is required',
         validate: {
-          validator: function (value) {
-            return moment().startOf('day').isBefore(moment(value))
-          },
-          message: props => `Date must not be in the past`
-        }    
+            validator: function (value) {
+                return moment().startOf('day').isBefore(moment(value))
+            },
+            message: props => `Date must not be in the past`
+        }
     },
     duration: {
         type: Number,
@@ -76,14 +92,14 @@ const eventSchema = new Schema ({
     //         required: 'The location of the event is required',
     //       }
     // },
-} , {
+}, {
     timestamps: true,
     toJSON: {
         transform: function (doc, ret) {
-        delete ret._id;
-        delete ret.__v;
-        ret.id = doc.id;
-        return ret;
+            delete ret._id;
+            delete ret.__v;
+            ret.id = doc.id;
+            return ret;
         }
     }
 }

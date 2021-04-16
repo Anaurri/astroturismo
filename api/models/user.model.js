@@ -25,7 +25,7 @@ const userSchema = new Schema({
     contactEmail: { /*Solo habrá contactEmail si el role===company*/ 
         unique: true, 
         type: String,
-        required: 'A valid email is required',
+        // required: 'A valid email is required',
         match: [EMAIL_PATTERN, 'the email is invalid']
     },
     city: { /*Solo habrá city si el role===company*/ 
@@ -52,8 +52,20 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
-        default: `https://res.cloudinary.com/anthillweb/image/upload/v1613921232/users-avatars/Flik_gyce2o.png`
-      }
+        required: 'Image is required',
+        default: `https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_8_eas03g.png`,
+        validate: {
+            validator: function (value) {
+                try {
+                    const url = new URL(value);
+                    return url.protocol === 'http:' || url.protocol === 'https:'
+                } catch (error) {
+                    return false;
+                }
+            },
+            message: props => `Invalid image URL`
+        }
+    },
 }, {
     timestamps: true,
 
