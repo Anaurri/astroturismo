@@ -238,6 +238,24 @@ Nuestra ejecución del build vuelve a cambiar. Le tenemos que pasar:
 
 ------------------------DESPLEGAR EN HEROKU---------------------------------------------
 
+Previamente hemos desplegado nuestro proyecto en HEROKU. Mirar en AboutHeroku
+
 https://devcenter.heroku.com/articles/build-docker-images-heroku-yml
 
 1.Me creo el fichero heroku.yml
+
+    build:
+         docker:
+         web: Dockerfile
+
+El run no lo necesitamos. Ya lo tenemos en la imagen de docker.
+               --         run:
+               --         web: bundle exec puma -C config/puma.rb
+
+2. Añadimos el argumento que teníamos de entrada:
+
+    config:
+      REACT_APP_API_BASE_URL: http://astroturismo:3001/api
+
+
+3.Hago commit a github
