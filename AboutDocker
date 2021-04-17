@@ -1,0 +1,243 @@
+NUESTRA IMAGEN DE DOCKER LLEGARÁ A EJECUTAR MI PROYECTO.
+
+Mi ordenador va a ser mi dockerhost. Donde mi ordenador, le dará recursos al contenedor de docker para que pueda ejecutar, instalar.. las dependencias 
+requeridas. Esos recursos son memoria RAM por ejemplo.
+
+La base de un contenedor de Docker, es un Sistema Operativo (ya sea de liux, microsoft...). El más común es el de ALPINE que es una máquina de linux,
+Alpine ocupa muy poco ( <3MB ) frente a otras que pueden ocupar 300MB. Podría coger una IMAGEN de Alpine y añadirle capas:
+p.e. Si quisiera instalar nodejs a partir de una imagen de alpine :
+   
+    sudo apt update
+    sugo apt install nodejs
+
+Pero en dockerhub ya vamos a tener imágenes donde la última capa sea nodejs.
+
+
+Para mi contenedor de Docker voy a partir de una imagen(dockerfile) nodejs pero que a su vez esta imagen tenga capa primaria ALPINE.
+
+https://hub.docker.com/
+Busco Node. Luego en TAGS busco alpine3.13. Y vamos a coger en la imagen de node15 , versión 14 , alpine 3.13
+
+15.14.0-alpine3.13 y copio :
+
+docker pull node:15.14.0-alpine3.13
+
+Y lo metemos despues del FROM:
+
+FROM node:15.14.0-alpine3.13
+
+LAS VERSIONES DE DOCKER BIIEEEEN VERSIONADAS. Nunca poner node:latest. Porque puede fallarte más adelante cuando haya nuevas versiones
+
+
+Nos copiamos el proyecto en la imagen de docker: COPY
+Las carpetas del proyecto se suelen copiar en una nueva carpeta llamada opt: COPY api /opt/api
+
+
+La terminal del docker tenemos que redirigiarla a opt/api. ( si no se quedaría en la raíz de mi equipo ) : WORKDIR /opt/api
+
+Y ahora, describimos las ejecuciones con el RUN:lo que antes haciamos como npm i, en un entorno de producción tendrá el siguiente aspecto:
+npm ci --only=production  ( la diferencia es que el CI mira tambien en el package-lock y si hay alguna diferencia con el packagejson va a petar.
+Tambien va a omitir las dependencias que usemos en desarrollo ( nodemon, jasmine... )
+
+Ahora ya podemos arrancar la aplicación  con CMD. CMD [ "npm","start" ] --> esto se traduce a npm start. Cada palabra de la ejecución la separamos en 
+cadenas independientes.Son argumentos. Y tambien equivale a npm run start ( el run se puede obviar )
+
+TERMINAL:
+
+----$ sudo docker ps 
+
+¿ Cómo construimos la imagen ?
+nos vamos a la terminal y nos movemos hasta donde tenemos la Dockerfile del proyecto:
+
+----$ sudo docker build -t anaurri/astroturismo:1.0.0  -f Dockerfile . " ( -t (tag) --> nombrar la cebolla ). Pongo el nombre de mi cuenta de docker y de mi proyecto con su versión
+La versión de mi proyecto la podemos encontrar en el package.json.  -->  la web tiene "version": "0.1.0", La API "1.0.0". NOrmal mente la instrucción iría sin sudo, pero he instalado el docker con permisos de admin. 
+
+
+----$ sudo docker images --> aqui comprobamos que se ha creado 
+
+Despues vamos a tener que ejecutar la imagen como un contenedor de Docker. Y ya arrancaría nuestra aplicación
+
+----$ sudo docker run anaurri/astroturismo:1.0.0  
+
+ana@ana-X540LA:~/Desktop/Ironhack/fuentes/module3/astroturismo$ sudo  docker run anaurri/astroturismo:1.0.0 
+
+> api@1.0.0 start
+> node ./app.js
+
+hola
+Ready! Listen on port 3001
+
+
+----------EL DOCKER BUILD VA A EJECUTAR LOS COMANDOS:----------
+
+FROM node:15.14.0-alpine3.13
+COPY api /opt/api
+WORKDIR /opt/api
+RUN npm ci --only=production 
+
+----------EL DOCKER RUN VA AJECUTAR:----------
+
+CMD ["npm","start"]
+
+El contenedor de docker no está vivo para siempre
+Va  a ejecutar lo q le pidamos, un npm run start se queda corriendo siempre. Pero un CMD ["ls", "-l"] , solo va a ser esa instrucción. 
+
+
+
+___________________________MONGO________________________________
+
+LOs contenedores de DOCKER no se conectan al mongo por defecto. Cuando hacemos npm run start , se va a quedar escuchando en el puerto , pero no va a conectarse al mongo
+
+Podríamos pensar que tenemos que poner en nuestra imagen de docker de la api, una nueva capa con la dependencia de mongo. Pero no debemos confundirnos: la api no necesita de mongo para ejecutarse, 
+lo necesita para tener funcionalidad. 
+
+LO que vamos a hacer es hacer otro contenedor para el mongo.
+
+NO vamos a crear una nueva imagen porque el en dockerhub ya la tenemo: NO TENEMOS QUE HACER EL DOCKER BUILD
+
+
+LAs dos imágenes van a compartir host ( mi ordenador ), y las vamos a relacionar en paralelo.
+
+https://hub.docker.com/
+Busco MOngo. La 4.4.5
+
+Solo tenemos que ejecutar el contenedor. La BBDD se guarda en disco duro. No podemos guardar los datos en el contenedor de docker , porque solo estarán cuando esté vivo el contenedor. 
+Tenemos que:
+- Crearnos una carpeta: mkdir database
+- Conectarle al mongo un volumen( el -v copia lo que hace el directorio de docker(/data/db) en el directorio local que le diga ):  docker run -v /home/ana/Desktop/Ironhack/fuentes/module3/astroturismo/database:/data/db   NO solo va a guardarme en local lo q se vaya haciendo durante la ejecución. 
+    SI no que cuando lo vuelva a ejecutar, tambien vuelca de database a /data/db lo que ya hubiera en la carpeta local.
+- Además, le tengo que dar un nombre al contenedor q esta corriendo, La imagen es mongo:4.4.5, 
+y el nombre del contenedor va a ser mongodb. ( --name mongodb ) Porque como partimos de una imagen de docker, docker va a ponerle un nombre aleatorio 
+- Conectarnos a un puerto con -p ( q , igual q con -v , le estamos diciendo: todo el tráfico de datos que va por este puerto de docker, cópialo en este otro local , q en nuestro caso yen el d docker van a temer el mismo nombre:  27017 )
+
+
+ ----$ mkdir database
+ ----$ sudo docker run -v /home/ana/Desktop/Ironhack/fuentes/module3/astroturismo/database:/data/db --name mongodb -p 27017:27017 mongo:4.4.5
+
+ aunque yo tenga el mongo instalado en mi ordenador, ESTO SE EJECUTARÍA IGUAL Q SI NO LO TUVIERA. Mi puerto 27017 recibe info , pero a partir del contenedor de docker. FUncionaría igual en un ordenador sin mongo. 
+ 
+
+ ^C para pararlo. Pero no se elimina el nombre del contenedor. 7f1295f0b3ef61316babfc6ad5677337ce592ccdce19c1f66eb1184724dabab6
+
+
+SI TE DA ESTE ERROR, es q ya está creado el contenedor. TIenes que cargártelo. 
+ana@ana-X540LA:~/Desktop/Ironhack/fuentes/module3/astroturismo$ mkdir database
+ana@ana-X540LA:~/Desktop/Ironhack/fuentes/module3/astroturismo$ sudo docker run -v /home/ana/Desktop/Ironhack/fuentes/module3/astroturismo/database:/data/db --name mongodb -p 27017:27017 mongo:4.4.5
+docker: Error response from daemon: Conflict. The container name "/mongodb" is already in use by container "7f1295f0b3ef61316babfc6ad5677337ce592ccdce19c1f66eb1184724dabab6". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+
+
+----$ sudo docker rm 7f1295f0b3ef61316babfc6ad5677337ce592ccdce19c1f66eb1184724dabab6
+
+
+Tengo que meter el DATABASE EN EL GITIGNORE
+En el database se me han creado cosas. 
+
+-----------------------------------CONECTAR MI APLICACIÓN A MONGO---------------------------
+
+Tenemos que volver a tocar nuestra imagen de docker:
+
+Antes la teniamos asi:
+
+FROM node:15.14.0-alpine3.13
+
+COPY api /opt/api
+WORKDIR /opt/api
+
+RUN npm ci --only=production 
+
+CMD ["npm","start"]
+
+AHORA:
+
+1. Le tenemos que indicar el puerto donde se va a ejecutar y conectarlo con  mi puerto local. 
+    EXPOSE 3001
+2. Luego , creamos la imagen:
+----$ sudo docker build -t anaurri/astroturismo:1.0.0  -f Dockerfile .
+3. Arrancamos contenedor:
+    3.1: cambio la variable de entorno de mi aplicación y pongo el nombre del contenedor de docker mongo: mongodb  (local host era mongodb://127.0.0.1:27017/astroturismo)
+        --env MONGODB_URI=mongodb://mongodb:27017/astroturismo 
+        y le pido que lo linke : --link mongodb
+
+
+
+----$ sudo docker run --env MONGODB_URI=mongodb://mongodb:27017/astroturismo --link mongodb anaurri/astroturismo:1.0.0   
+
+SI miramos ahora el database, vemos que se me ha metido todo lo q tenía en mi mongo local. 
+SI queremos ejecutar un seeds, se hace por fuera. NO lo metemos en ninguna imagen d docker. 
+
+
+___________________________REACT________________________________
+
+El react no necesita conectarse a un puerto. Es mero html, css, y js.
+Vamos a construir un servidor de ficheros estáticos 
+Voy a preparar el servidor express para que pueda servirme el react.
+
+1. me creo una carpeta en la api que se llame react-app y le meto un gitkeep para q se comiteé aunque este vacia la carpeta (las carpetas vacias de normal no se comitean en git a no ser que pongamos gitkeep )
+2. en el app.js -->     app.use(express.static(`${_dirname}/react-app`))
+3. en consola, EN LA PARTE DE WEB, empaquetamos la carpeta WEB 
+----$ cd web
+----$ npm run build  (empaquetamos la carpeta WEB )
+
+coge todos los ficheros js , los traduce con el babel, junta los archivos css... y nos lo deja todo en 3 archivos más o menos
+
+Si vemos en la parte web, se nos ha creado una carpeta llamada build. No se comitea.
+Esa carpeta la tenemos q llevar al react-app
+Ahora en desarrollo no nos importa. Pero luego , al subir a PR tenemos que unirlo
+
+4. Tenemos que poner en la imagen del docker, las construcción de la aplicación de react.
+
+FROM buildkite/puppeteer:5.2.1 as react-build  : este paquete no es de la gente de docker, es de buildkite. Y tiene todo el software necesario para construir app de react
+
+LE pasamos las variables de entorno como argumentos: EN el base-api-service de la web, teniamos una variable de entorno REACT_APP_API_BASE_URL
+
+ARG REACT_APP_API_BASE_URL ( ARG es obligatorio para poder montar el react)
+
+5. Copiamos los directorios 
+COPY web /opt/web
+WORKDIR /opt/web
+
+6. Escribo la ejecución. Y además, corro el build:  npm run build
+RUN npm --ci only=production && npm run build
+
+hasta aqui bien: tenemos dos CAPAS de FROM/COPY/RUN...cuando llegue a la CAPA d la API, todo lo que he hecho arriba me va a dar igual
+Pero no nos importa, porque lo que hemos hecho es darle instrucciones para q me creé la parte react.
+
+Solo le tengo que decir en las instrucciones de la API , q me copie esa carpeta build, en la carpeta que hemos creado en la API: react-app
+
+COPY --from=react-build /opt/web/buid /opt/api/react-app
+
+
+7. Añadimos en el app.js de la API :
+app.use('/api',router);
+app.get('/*' , (req, res) => {
+    res.sendFile(`${_dirname}/react-app/index.html`)
+});
+
+aqui en el app.js tendríamos que tener el control de error 404. En vez de eso, lo pondremos en el routes.config, cuando 
+no se encuentre ninguna ruta de las configuradas en el routes.config
+y en el router de la API, le digo que los createErrors solo den cuando se trate de una ruta no encontrada en la API
+/*Handel errors*/
+app.use((req, res, next)=>{
+    next(createError(404, 'Route not found'))
+})
+Conclusión: Nuestro servidor no solo va a servir una API Express, tambien va a servir un react. Que son solo peticiones get de ficheros ( los ficheros estáticos del react-build )
+SI no hacemos el punto 7, no va a enrutar bien al principio. Si copio una url de la app y lo copio en una nueva pestaña, si no hago esto me va a dar un NOTFOUND.
+Luego ya, una vez montada la web, si que me puedo mover entre diferentes rutas sin problema (axios)
+FINALMENTE:
+
+Nuestra ejecución del build vuelve a cambiar. Le tenemos que pasar:
+
+1. EL argunmento de construcción de la parte de react. 
+
+----$ sudo docker build --build-arg REACT_APP_API_BASE_URL=http://localhost:3001/api -t anaurri/astroturismo:1.0.0  -f Dockerfile .
+
+
+----$ sudo docker run --env MONGODB_URI=mongodb://mongodb:27017/astroturismo --link mongodb anaurri/astroturismo:1.0.0   
+
+
+------------------------DESPLEGAR EN HEROKU---------------------------------------------
+
+https://devcenter.heroku.com/articles/build-docker-images-heroku-yml
+
+1.Me creo el fichero heroku.yml

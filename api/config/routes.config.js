@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const createError = require('http-errors');
 const eventsController = require('../controllers/events.controller');
 const usersController = require('../controllers/users.controller');
 const reservationController = require('../controllers/reservation.controller');
@@ -36,5 +37,8 @@ router.post('/notifications/notices', notificationsController.createNotice);  //
 router.post('/notifications/message', secure.isAuthenticated, notificationsController.createMessage); //Postman ok
 
 
-
+/*Handel errors*/
+router.use((req, res, next)=>{
+    next(createError(404, 'Route not found'))
+})
 module.exports = router;

@@ -27,7 +27,9 @@ app.use(passport.session());
 /** Configure routes */
 const router = require('./config/routes.config')
 app.use('/api', router);
-
+app.get('/*' , (req, res) => {
+    res.sendFile(`${_dirname}/react-app/index.html`)
+});
 
 /** Handle Errors */
 app.use((req, res, next) => {
