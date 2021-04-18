@@ -1,0 +1,13 @@
+{
+    "Navbar": {
+      "title": "Astroturism",
+      "login": "Login",
+      "events": "Experiences",
+      "register": "Register"
+    },
+    "Events": {
+      "title": "Experience a closer look into the universe!",
+      "subtitle": "Find the best astrotouristic experiences here"
+       }
+  }
+  

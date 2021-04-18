@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-
 import eventsService from '../../services/events-service';
 import { Fragment } from 'react';
+import EventItem from './EventItem';
 
 function EventsList({ minSearchChars }) {
 
@@ -49,7 +49,7 @@ function EventsList({ minSearchChars }) {
     <Fragment>
       <div className="row row-cols-4">
         {events.map(event => (
-          <div key={event.id} className="col mb-4">{event.name}</div>
+          <div key={event.id} className="col mb-4"><EventItem event={event}></EventItem></div>
         ))}
       </div>
     </Fragment>

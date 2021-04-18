@@ -5,43 +5,38 @@
       "description": "Obeservación de perseidas con guía y telescopio muy cerca de Segovia",
       "tags": ["Perseidas","Segovia"],
       "lodge": "",
-      "location":{
-        "coordinates": [
-          41,
-          -2
+      "city": "Segovia",
+      "location":  {
+        "type" : "Point",
+        "coordinates" : [
+            -2,
+            37.7
         ]
-    },
+  },
       "date": "03/01/2026",
       "duration": "90",
       "capacity": 15,
-      "booking": 8,
-      "price": 10,
-      "meetingPoint": [
-        41,
-        -2
-      ]
+      "price": 10
     },
     {
         "name": "Avistamiento eclipse lunar del próximo mes de agosto",
-        "company": "turismo@segovia.com",
-        "description": "Ven a ver junto a nuestro guía Ramón el esperado eclipse de luna",
+        "company": "turismo@valencia.com",
+        "description": "Ven a ver junto a nuestro guía Ramón el esperado eclipse de luna en la playa de la Malvarrosa",
         "tags": ["Eclipse","Luna", "Valencia"],
+        "city": "Valencia",
+        "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1618768866/astroturismo/valencia_knlp7f.jpg",
         "lodge": "",
-        "location":{
-          "coordinates": [
-            41,
-            -2
+        "location":  {
+          "type" : "Point",
+          "coordinates" : [
+              -2,
+              37.7
           ]
-      },
+    },
         "date": "03/08/2026",
         "duration": "120",
         "capacity": 30,
-        "booking": 29,
-        "price": 5,
-        "meetingPoint": [
-          41,
-          -2
-        ]
+        "price": 5
       },
       {
         "name": "Observación de contelaciones",
@@ -49,19 +44,97 @@
         "description": "Excursión al Cerro del Puerco.La excursión incluye un picnic de embutido y vino de la zona para cenar y la explicación y observación de las constelaciones a través de telescopio a manos del guía. ",
         "tags": ["Constelaciones","Segovia", "La Granja de San Ildefonso"],
         "lodge": "https://puertadelcampo.es/",
-        "location":{
-          "coordinates": [
-            41,
-            -2
+        "city": "La Granja de San Ildefonso, Segovia",
+        "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1618768759/astroturismo/background_3_f44ghi.jpg",
+        "location":  {
+          "type" : "Point",
+          "coordinates" : [
+              -2,
+              37.7
           ]
-      },
+    },
         "date": "03/07/2026",
         "duration": "240",
         "capacity": 10,
-        "price": 30,
-        "meetingPoint": [
-          41,
-          -2
-        ]
+        "price": 30
+      },  
+      
+      {
+        "name": "¡Lluvia de estrellas!",
+        "company": "aprendiendo.estrellas@example.org",
+        "description": "Excursión a la sierra de Guadarrama para disfrutar de las lágrimas de San Lorenzo en un paraje incomparable, libre de contaminación lumínica",
+        "tags": ["Perseidas","Segovia", "La Granja de San Ildefonso"],
+        "lodge": "https://puertadelcampo.es/",
+        "city": "La Granja de San Ildefonso, Segovia",
+        "location":  {
+          "type" : "Point",
+          "coordinates" : [
+              -2,
+              37.7
+          ]
+    },
+        "date": "03/07/2026",
+        "duration": "240",
+        "capacity": 10,
+        "price": 30
+      },
+      {
+        "name": "Visita al observatorio de ",
+        "company": "aprendiendo.estrellas@example.org",
+        "description": "El Observatorio del Teide abre sus puertas a los distintos colectivos de usuarios. Podrás visitar algunos telescopios y conocer mejor el trabajo que realizamos.Cada año se realizan unas Jornadas de Puertas Abiertas. Durante dos días, nuestros profesionales te mostrarán las instalaciones del Observatorio y para qué se utilizan.",
+        "tags": ["Constelaciones","Teide", "Tenerife"],
+        "city": "Tenerife",
+        "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1618768759/astroturismo/background_4_pifutb.jpg",
+        "location":  {
+          "type" : "Point",
+          "coordinates" : [
+              -2,
+              37.7
+          ]
+    },
+        "date": "03/07/2026",
+        "duration": "240",
+        "capacity": 10,
+        "price": 30
+      },
+      {
+        "name": "Observación de estrellas",
+        "company": "aprendiendo.estrellas@example.org",
+        "description": "Excursión al Cerro del Puerco.La excursión incluye un picnic de embutido y vino de la zona para cenar y la explicación y observación de las constelaciones a través de telescopio a manos del guía. ",
+        "tags": ["Constelaciones","Segovia", "La Granja de San Ildefonso"],
+        "lodge": "https://puertadelcampo.es/",
+        "city": "La Granja de San Ildefonso, Segovia",
+        "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1618768759/astroturismo/background_3_f44ghi.jpg",
+        "location":  {
+          "type" : "Point",
+          "coordinates" : [
+              -2,
+              37.7
+          ]
+    },
+        "date": "03/07/2026",
+        "duration": "240",
+        "capacity": 10,
+        "price": 30
+      },
+      {
+        "name": "Observación de contelaciones",
+        "company": "aprendiendo.estrellas@example.org",
+        "description": "Excursión al Cerro del Puerco.La excursión incluye un picnic de embutido y vino de la zona para cenar y la explicación y observación de las constelaciones a través de telescopio a manos del guía. ",
+        "tags": ["Constelaciones","Segovia", "La Granja de San Ildefonso"],
+        "lodge": "https://puertadelcampo.es/",
+        "city": "La Granja de San Ildefonso, Segovia",
+        "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1618768759/astroturismo/background_3_f44ghi.jpg",
+        "location":  {
+          "type" : "Point",
+          "coordinates" : [
+              -2,
+              37.7
+          ]
+    },
+        "date": "03/07/2026",
+        "duration": "240",
+        "capacity": 10,
+        "price": 30
       }
 ]

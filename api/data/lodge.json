@@ -3,23 +3,25 @@
       "name": "Hotel Los Arcos",
 
       "description": "Reserva por pesona con desayuno",
-      "location": {
-        "coordinates": [
-          40,
-          -2
+      "location":  {
+        "type" : "Point",
+        "coordinates" : [
+            -2,
+            37.7
         ]
-      },
+  },
       "urlLodge": "https://www.hotellosarcos.com/"
     },
     {
         "name": "Albergue Puerta del campo en la Granja de San Ildefonso",
         "description": "Reserva por pesona en habitación compartida",
-        "location": {
-          "coordinates": [
-            41,
-            -2
+        "location":  {
+          "type" : "Point",
+          "coordinates" : [
+              -2,
+              37.7
           ]
-        },
+    },
         "urlLodge": "https://puertadelcampo.es/"
     }
 ]

@@ -2,10 +2,6 @@
 2.  create app : astroturismo
 3.  logeada desde navegador, en console: heroku login . Asi me linka con mi repositorio
 4.  cd astroturismo 
-    git init 
     heroku git:remote -a astroturismo
-    git add .
-    git commit -am "feat: "
-    git push heroku master
 
 

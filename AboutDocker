@@ -231,9 +231,12 @@ Nuestra ejecución del build vuelve a cambiar. Le tenemos que pasar:
 1. EL argunmento de construcción de la parte de react. 
 
 ----$ sudo docker build --build-arg REACT_APP_API_BASE_URL=http://localhost:3001/api -t anaurri/astroturismo:1.0.0  -f Dockerfile .
-
-
+----$ sudo docker run -v /home/ana/Desktop/Ironhack/fuentes/module3/astroturismo/database:/data/db --name mongodb -p 27017:27017 mongo:4.4.5
 ----$ sudo docker run --env MONGODB_URI=mongodb://mongodb:27017/astroturismo --link mongodb anaurri/astroturismo:1.0.0   
+
+
+----$ sudo docker rm 7f1295f0b3ef61316babfc6ad5677337ce592ccdce19c1f66eb1184724dabab6
+
 
 
 ------------------------DESPLEGAR EN HEROKU---------------------------------------------

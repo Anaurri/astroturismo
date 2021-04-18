@@ -22,12 +22,12 @@ const userSchema = new Schema({
     phoneNumber: { /*Solo habrá phoneNumber si el role===company*/ 
         type: String,
     },
-    contactEmail: { /*Solo habrá contactEmail si el role===company*/ 
-        unique: true, 
-        type: String,
-        // required: 'A valid email is required',
-        match: [EMAIL_PATTERN, 'the email is invalid']
-    },
+    // contactEmail: { /*Solo habrá contactEmail si el role===company*/ 
+    //     unique: true, 
+    //     type: String,
+    //     // required: 'A valid email is required',
+    //     match: [EMAIL_PATTERN, 'the email is invalid']
+    // },
     city: { /*Solo habrá city si el role===company*/ 
         type: String,
     },

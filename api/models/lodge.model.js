@@ -13,22 +13,15 @@ const lodgeSchema = new Schema ({
     },
     location: {
       type: {
-        type: String,
-        enum: ['Point'],
-        default: 'Point'
+          type: String,
+          enum: ['Point'],
+          default: 'Point'
       },
       coordinates: {
-        type: [Number],
-        default: void 0,
-        required: 'The location of the hotel is required',
-        validate: {
-          validator: function([lng, LAT]) {
-            return isFinite(lng) && isFinite(lat) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
-          },
-          message: props => `Invalid location coordinates`
-        }
+          type: [Number],
+          required: 'The location of the event is required',
       }
-    },
+  },
     urlLodge: {
       type: String,
       validate: {

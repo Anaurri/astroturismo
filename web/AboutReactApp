@@ -19,18 +19,15 @@ npx create-react-app web
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.1"
-  },
-
-  FALTARÍAN:
-
-    "dependencies": {
     "axios": "^0.21.1",
-    "i18next": "^20.2.1",
-    "moment": "^2.29.1",
-    "react-i18next": "^11.8.12",
     "react-router-dom": "^5.2.0",
-  },
+    "web-vitals": "^1.1.1",
+    "i18next": "^20.2.1",
+    "react-i18next": "^11.8.12"
+    "moment": "^2.29.1",
+
+
+  }
 
 
 index.js : Apenas se toca. Solo cuando instalemos el in tenemos que añadirlo en el index.js
