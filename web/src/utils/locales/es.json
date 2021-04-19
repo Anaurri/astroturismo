@@ -8,6 +8,12 @@
     "Events": {
       "title": "¡Vive la experiencia de conocer nuestro universo!",
       "subtitle": "Bienvenido al portal donde encontrarás las mejores experiencias astronomicas"
+    },
+    "User": {
+      "title": "Mi perfil!",
+      "events": "Tus historial de experiencias",
+      "textToCompany": "Usuario empresa"
+
     }
   }
   

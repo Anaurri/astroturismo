@@ -1,6 +1,8 @@
 
 import { useState } from 'react';
 import { useHistory } from 'react-router';
+import { useTranslation } from 'react-i18next';
+
 
 
 import { register } from '../../services/users-service';
@@ -38,17 +40,22 @@ const validations = {
 
 function RegisterForm() {
 
+
+
   const history = useHistory();
   const [state, setState] = useState({
     user: {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      role: ''
+
     },
     errors: {
       name: validations.name(),
       email: validations.email(),
-      password: validations.password()
+      password: validations.password(),
+
     },
     touch: {}
   });
@@ -103,6 +110,8 @@ function RegisterForm() {
   }
 
   const { user, errors, touch } = state;
+  const { t } = useTranslation()
+
 
   return (
     <form className="mt-3 mb-3" onSubmit={handleSubmit}>
@@ -127,10 +136,15 @@ function RegisterForm() {
           placeholder="Password" onBlur={handleBlur} onChange={handleChange} value={user.password} />
         <div className="invalid-feedback">{errors.password}</div>
       </div>
+      <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" name="role" id="check1"  onBlur={handleBlur} onChange={handleChange} value='company'  disabled=""/>
+          <label class="custom-control-label" for="check1">{t('User.textToCompany')}</label>
+        </div>
 
       <div className="d-grid gap-2">
         <button className="btn btn-primary" type="submit" disabled={!isValid()}>Register</button>
       </div>
+
 
     </form>
   );

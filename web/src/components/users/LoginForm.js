@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useHistory, useLocation } from "react-router";
-import { login } from "../../services/users-service";
+import { login } from "../../services/users-service"; //otra forma de exportar/importar varios endpoints. Mirar diferencia entre eventservices y usersservices.
 import { AuthContext } from '../../contexts/AuthStore';
 
 function LoginForm() {

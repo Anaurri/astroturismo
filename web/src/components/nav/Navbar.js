@@ -8,7 +8,7 @@ import logo from '../../images/icons/saturno_gold.png'
 
 function Navbar() {
   const { t } = useTranslation()
-  const { user, isAuthenticated, onUserChange } = useContext(AuthContext);
+  const { user, isAuthenticated, isCompany, onUserChange } = useContext(AuthContext);
   const history = useHistory();
 
   async function handleLogout() {
@@ -16,6 +16,7 @@ function Navbar() {
     onUserChange(undefined);
     history.push('/login');
   }
+
 
 
   return (
@@ -42,9 +43,11 @@ function Navbar() {
             )}
             {isAuthenticated() && (
               <Fragment>
-                <li className="nav-item"><Link className="nav-link text-light" to="/create-event"><i className="fa fa-plus" /></Link></li>
+                 {isCompany() && (
+                <li className="nav-item"><Link className="nav-link text-warning" to="/create-event"><i className="fa fa-plus" /></Link></li>
+                )}
                 <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/profile">{user.email}</NavLink></li>
-                <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled text-light" onClick={handleLogout}><i className="fa fa-sign-out" ></i></button></li>
+                <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled text-warning" onClick={handleLogout}><i className="fa fa-sign-out " ></i></button></li>
               </Fragment>
             )}
           <li className="nav-item" style={{ paddingTop: '5px'}}><Langs /></li>

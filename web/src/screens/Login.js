@@ -1,12 +1,12 @@
-import RegisterForm from '../components/users/RegisterForm';
+import LoginForm from '../components/users/LoginForm';
 import { Link } from 'react-router-dom';
 // import { socialLoginUrl } from '../services/users-service';
 
-function Register() {
+function Login() {
   return (
     <div className="row">
       <div className="col-12 col-sm-4 mx-auto">
-        <RegisterForm />
+        <LoginForm />
         <hr/>
         <div className="d-grid gap-2">
           <Link className="btn btn-secondary" type="button" to="/login">Login</Link>
@@ -17,4 +17,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

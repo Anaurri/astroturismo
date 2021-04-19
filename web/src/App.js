@@ -1,8 +1,9 @@
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Navbar from './components/nav/Navbar';
 import Events from './screens/Events';
-import Login from './screens/Register';
-import Register from './screens/Login';
+import Login from './screens/Login';
+import Register from './screens/Register';
+import Profile from './screens/Profile';
 import AuthStore from './contexts/AuthStore';
 import Error from './screens/Error';
 import AuthCallback from './screens/AuthCallback';
@@ -34,6 +35,8 @@ function App() {
             <Route exact path="/authenticate/google/cb" component={AuthCallback}/>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/profile" component={Profile} />
+
             
             <Route exact path="/events" component={Events} />
             

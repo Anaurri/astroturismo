@@ -18,8 +18,16 @@ function AuthStore({ children }) {
     return user && user.email;
   }, [user])
 
+  const isCompany = useCallback(() => {
+    if (user){
+      return user.role==='company';
+    }
+    else return false
+  }, [user])
+
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, onUserChange: handleUserChange }} >
+    <AuthContext.Provider value={{ user, isAuthenticated, isCompany, onUserChange: handleUserChange }} >
       {children}
     </AuthContext.Provider>
   );
