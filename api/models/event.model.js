@@ -47,15 +47,22 @@ const eventSchema = new Schema({
     },
     location: {
         type: {
-            type: String,
-            enum: ['Point'],
-            default: 'Point'
+          type: String,
+          enum: ['Point'],
+          default: 'Point'
         },
         coordinates: {
-            type: [Number],
-            required: 'The location of the event is required',
+          type: [Number],
+          default: void 0,
+          required: 'The location of the event is required',
+          validate: {
+            validator: function([lng, lat]) {
+              return isFinite(lng) && isFinite(lat) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
+            },
+            message: props => `Invalid location coordinates`
+          }
         }
-    },
+      },
     date: {
         type: Date,
         required: 'Date is required',
@@ -99,12 +106,16 @@ const eventSchema = new Schema({
             delete ret._id;
             delete ret.__v;
             ret.id = doc.id;
+            ret.location = ret.location.coordinates;
+
             return ret;
         }
     }
 }
 )
 eventSchema.index({ location: '2dsphere' });
+
+
 /*Este atributo virtual nos va relacionar las reservas con el evento para saber las plazas que nos quedan. 
 (las reservas no son monoplaza, una reserva puede llevar 4 plazas). NO tiene valor como tal. CUando queramos saber las 
 plazas que nos quedan , tendremos que contarlas.*/

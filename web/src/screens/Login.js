@@ -9,7 +9,6 @@ function Login() {
         <LoginForm />
         <hr/>
         <div className="d-grid gap-2">
-          <Link className="btn btn-secondary" type="button" to="/login">Login</Link>
           {/* <a className="btn btn-danger" href={socialLoginUrl}><i className="fa fa-google"></i> Login with Google</a> */}
         </div>
       </div>

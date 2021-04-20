@@ -43,7 +43,7 @@ function Navbar() {
             )}
             {isAuthenticated() && (
               <Fragment>
-                 {isCompany() && (
+                  {isCompany() && (
                 <li className="nav-item"><Link className="nav-link text-warning" to="/create-event"><i className="fa fa-plus" /></Link></li>
                 )}
                 <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/profile">{user.email}</NavLink></li>

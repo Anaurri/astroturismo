@@ -21,13 +21,15 @@ module.exports.detail = (req, res, next) => {
     .catch(next)
 }
 module.exports.create = (req, res, next) => {
-  // console.log (location)
-
-  // req.body.location = {
-  //   type: 'Point',
-  //   coordinates: location
-  // }
+  const { location } = req.body;
+  console.log('location', location);
+  req.body.location = {
+    type: 'Point',
+    coordinates: location
+  }
   req.body.company = req.user.id;
+  console.log(req.body.company)
+
   if (req.file) {
     req.body.image = req.file.url
   }
@@ -102,7 +104,11 @@ module.exports.update = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
+
+  console.log("entremos en el delete")
+  const today = new Date(); //hoy en ms desde 1970
   Event.findById(req.params.id)
+    .populate('reservations') //el mongoose no te trae el virtual por defecto si no se lo pides porque cuesta. De ahí el populate.
     .then(event => {
       if (!event) next(createError(404, 'Event not found'))
       else if (event.company != req.user.id) next(createError(403, 'Only the company of the event can perform this action'))
@@ -117,7 +123,8 @@ module.exports.delete = (req, res, next) => {
               sender: req.user.id,
               recipient: reservation.client,
               date: today,
-              textNotification: req.body.textNotification,
+              // textNotification: req.body.textNotification,
+              textNotification: "este texto luego lo tendrá que rellenar el usuario",
               titleNotification: "The event has been canceled"
             }
             return Notification.create(notification) /*Aqui no creamos las notificaciones. SOlo creamoS la query , y cuando pongamos el .then en el Promise.all será cuando se creen en BBDD. EL return de esta línea es por el map*/

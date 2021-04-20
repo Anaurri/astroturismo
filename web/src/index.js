@@ -8,7 +8,7 @@ import './services/i18n-service'; // init i18n system
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

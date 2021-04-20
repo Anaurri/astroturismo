@@ -12,7 +12,6 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -37,13 +36,19 @@
   }
 }
 
-.App-bg {
 
-  background-image:  url('./images/background/background_2.jpg');
-  background-position: 0 , 0;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  position:relative;
-  height: 800px;
 
+body, html {
+height: 100%;
+}
+
+.bg {
+/* background-image:  url('./images/background/background_2.jpg'); */
+background-image:  url('https://www.wallpapertip.com/wmimgs/66-663627_stars-and-forest-wallpaper-hd.jpg');
+
+height: 100vmin;
+
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
 }

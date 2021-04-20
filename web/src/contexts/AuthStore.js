@@ -19,10 +19,7 @@ function AuthStore({ children }) {
   }, [user])
 
   const isCompany = useCallback(() => {
-    if (user){
-      return user.role==='company';
-    }
-    else return false
+      return user?.role==='company';
   }, [user])
 
 
