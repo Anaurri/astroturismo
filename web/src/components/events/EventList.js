@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 import EventItem from './EventItem';
 import EventsFilter from './EventsFilter'
 
-
 function EventsList({ minSearchChars, showFilter, companyId }) {
 
   const [state, setState] = useState({
@@ -56,7 +55,12 @@ function EventsList({ minSearchChars, showFilter, companyId }) {
       events: state.events.filter(event => (event.id !== id))
     }))
 
+  }
 
+  const handleCreateReservation = id => { 
+    setState(state => ({
+      ...state
+    }))
   }
 
   const { events, loading } = state;
@@ -67,10 +71,10 @@ function EventsList({ minSearchChars, showFilter, companyId }) {
   return (
     <Fragment >
       {showFilter &&  (<EventsFilter className="mb-3" onSearch={handleSearch} loading={loading} />)}
-      <div className="container pt-4 pb-5 bg-light overflow auto" style={{ height: "900px" , overflowY: "scroll", border:"warning"}}>
+      <div className="container pt-4 pb-5 bg-transparent overflow auto" style={{height: "800px" , overflowY: "scroll"}}>
         <div className="row row-cols-3">
           {events.map(event => (
-            <div key={event.id} className="col mb-4"><EventItem event={event} onDeleteEvent={handleDeleteEvent}></EventItem></div>
+            <div key={event.id} className="col mb-4"><EventItem event={event} onDeleteEvent={handleDeleteEvent} onCreateReservation={handleCreateReservation}></EventItem></div>
           ))}
         </div>
 
@@ -84,7 +88,6 @@ EventsList.defaultProps = {
   minSearchChars: 4,
   showFilter: true
 }
-
 export default EventsList;
 
 

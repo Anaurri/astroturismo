@@ -7,6 +7,19 @@ const Reservation = require('../models/reservation.model')
 const Event = require('../models/event.model')
 
 
+module.exports.list = (req, res, next) => {
+
+    Notification.find({ $or: [{ recipient: req.user.id }, { sender: req.user.id }] })
+        .populate('event', '_id name date') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
+        .populate('sender', '_id name email') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
+        .populate('recipient', '_id name email') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
+        .then(notifications => {
+            console.log(notifications)
+            if (notifications) res.json(notifications)
+            else next(createError(404, 'There is no notifications'))
+        })
+        .catch(next)
+}
 
 
 /*Este mensaje será cliente-comàñia o viceversa. El mensaje lo generan ellos en un formulario*/

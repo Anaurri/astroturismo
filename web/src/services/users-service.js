@@ -11,6 +11,6 @@ export const register = (user) => http.post('/register', user)
 
 export const logout = () => http.post('/logout')
 
-export const update = () => http.patch('/profile/update')
+export const update = (user) => http.patch('/profile/update')
 
 

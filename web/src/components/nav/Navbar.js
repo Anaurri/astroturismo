@@ -43,8 +43,9 @@ function Navbar() {
             )}
             {isAuthenticated() && (
               <Fragment>
+                <li className="nav-item"><Link className="nav-link text-warning" to="/notifications-list"><i className="fa fa-bell" /></Link></li>
                   {isCompany() && (
-                <li className="nav-item"><Link className="nav-link text-warning" to="/create-event"><i className="fa fa-plus" /></Link></li>
+                <li className="nav-item"><Link className="nav-link text-warning" to="/create-event"><i className="fa fa-plus" /> Publicar evento</Link></li>
                 )}
                 <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/profile">{user.email}</NavLink></li>
                 <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled text-warning" onClick={handleLogout}><i className="fa fa-sign-out " ></i></button></li>
@@ -59,3 +60,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

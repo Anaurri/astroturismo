@@ -35,16 +35,19 @@
     transform: rotate(360deg);
   }
 }
-
-
-
 body, html {
 height: 100%;
+
 }
 
 .bg {
 /* background-image:  url('./images/background/background_2.jpg'); */
+/* background-image:  url('./images/background/background_8.jpg'); */
+
+/* background-image:  url('https://www.wallpapertip.com/wmimgs/66-663627_stars-and-forest-wallpaper-hd.jpg'); */
+
 background-image:  url('https://www.wallpapertip.com/wmimgs/66-663627_stars-and-forest-wallpaper-hd.jpg');
+
 
 height: 100vmin;
 

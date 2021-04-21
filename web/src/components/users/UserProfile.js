@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import EventsList from '../events/EventList'
+import NotificationsList from '../notifications/NotificationsList';
+import ReservationsList from '../reservations/ReservationsList';
+
+
 
 
 
@@ -18,6 +22,8 @@ function UserProfile() {
         <Fragment>
             <div className="row py-5 px-4">
                 <div className="col-md-8">
+                {isAuthenticated() && (
+
                     <div className="card shadow-sm border-white rounded bg-black shadow rounded overflow-hidden">
                         <div className="px-4 pt-0 pb-4 cover">
                             <div className="media align-items-end profile-head">
@@ -34,19 +40,32 @@ function UserProfile() {
                         <div className="bg-light p-4 d-flex justify-content-end text-center">
                             <ul className="list-inline mb-0">
                                 <li className="list-inline-item">
-                                    <h8 className="font-weight-bold mb-0 d-block text-white">Email</h8><small className="text-muted"> <i className="fas fa-user mr-1 text-white"></i>{user.email}</small>
+                                    <h6 className="font-weight-bold mb-0 d-block text-white">Email</h6><small className="text-muted"> <i className="fas fa-user mr-1 text-white"></i>{user.email}</small>
                                 </li>
                                 <li className="list-inline-item">
-                                    <h8 className="font-weight-bold mb-0 d-block text-white">Phone Number</h8><small className="text-muted"> <i className="fas fa-image mr-1"></i>{user.phone}</small>
+                                    <h6 className="font-weight-bold mb-0 d-block text-white">Phone Number</h6><small className="text-muted"> <i className="fas fa-image mr-1"></i>{user.phone}</small>
                                 </li>
                                 <li className="list-inline-item">
-                                    <h8 className="font-weight-bold mb-0 d-block text-white">City</h8><small className="text-muted"> <i className="fas fa-image mr-1"></i>{user.city}</small>
+                                    <h6 className="font-weight-bold mb-0 d-block text-white">City</h6><small className="text-muted"> <i className="fas fa-image mr-1"></i>{user.city}</small>
                                 </li>
                             </ul>
                         </div>
                     </div>
+                )}
                 </div>
             </div>
+            <hr></hr>
+
+            <h3 className="mb-3">Notificaciones</h3>
+            <NotificationsList />
+
+            {!isCompany() && (
+                <div>
+                    <h3 className="mb-3">Reservas</h3>
+                    <ReservationsList />
+                </div>
+
+            )}
             {isCompany() && (
                 <Fragment>
 
@@ -70,6 +89,7 @@ function UserProfile() {
 
                 </Fragment>
             )}
+
 
         </Fragment>
 

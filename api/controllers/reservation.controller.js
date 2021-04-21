@@ -5,7 +5,7 @@ const Event = require('../models/event.model');
 const Reservation = require('../models/reservation.model')
 
 module.exports.create = (req, res, next) => {
-
+    console.log(req.body)
     Event.findById(req.params.id)
         .populate('reservations') //el mongoose no te trae el virtual por defecto si no se lo pides porque cuesta. De ahí el populate.
         .then(event => {
@@ -18,9 +18,7 @@ module.exports.create = (req, res, next) => {
 
                 if (availablePlace >= 0) {
                     req.body.date = event.date; //de momento la fecha de la reserva será la del evento. Más adelante un evento tendrá varias fechas
-
                     req.body.event = event.id;
-                    req.body.client = req.user.id;
                     req.body.client = req.user.id;
                     return Reservation.create(req.body)
                         .then(reservation => {
@@ -36,7 +34,7 @@ module.exports.create = (req, res, next) => {
 
 module.exports.list = (req, res, next) => {
     Reservation.find({ client: req.user.id })
-        .populate('event', '_id name date city packWithLodge company') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
+        // .populate('event', 'name') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
         .then(reservations => {
             if (reservations) res.json(reservations)
             else next(createError(404, 'There is no reservation'))

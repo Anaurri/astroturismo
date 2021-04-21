@@ -35,6 +35,8 @@ router.delete('/reservations/:id', secure.isAuthenticated, reservationController
 
 router.post('/notifications/notices', notificationsController.createNotice);  //Postman ok
 router.post('/notifications/message', secure.isAuthenticated, notificationsController.createMessage); //Postman ok
+router.get('/notifications/me', secure.isAuthenticated, notificationsController.list);  //Postman ok
+
 
 
 /*Handel errors*/
