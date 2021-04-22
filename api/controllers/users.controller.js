@@ -46,15 +46,8 @@ module.exports.list = (req, res, next) => {
     .then(users => res.json(users))
     .catch(next)
 }
-module.exports.view = (req, res, next) => {
-  User.findById(req.user.id)
-    .then(user => {
-      if (!user) next(createError(404, 'User not found'))
-      else if (user.id != req.user.id) next(createError(403, 'Forbidden'))
-      else res.json(user)
-    })
-    .catch(next)
-}
+module.exports.view = (req, res, next) => res.json(req.user)
+  
 
 module.exports.detail = (req, res, next) => {
   User.findById(req.params.id)

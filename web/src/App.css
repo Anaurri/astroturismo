@@ -13,7 +13,7 @@
   }
 }
 .App-header {
-  background-color: #282c34;
+  background-color: #000;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,19 +39,15 @@ body, html {
 height: 100%;
 
 }
-
 .bg {
-/* background-image:  url('./images/background/background_2.jpg'); */
-/* background-image:  url('./images/background/background_8.jpg'); */
-
-/* background-image:  url('https://www.wallpapertip.com/wmimgs/66-663627_stars-and-forest-wallpaper-hd.jpg'); */
-
-background-image:  url('https://www.wallpapertip.com/wmimgs/66-663627_stars-and-forest-wallpaper-hd.jpg');
 
 
-height: 100vmin;
+background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619117679/astroturismo/wallpaperflare.com_wallpaper_sposeb.jpg');
 
-background-position: center;
-background-repeat: no-repeat;
+/* background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619117977/astroturismo/wallpaper_f2gr4r.jpg'); */
+height: 120vmin;
+
+background-repeat: repeat;
 background-size: cover;
+
 }

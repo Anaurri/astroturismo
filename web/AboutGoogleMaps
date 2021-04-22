@@ -1,0 +1,22 @@
+
+npm install react-google-maps  --legacy-peer-deps  ( la hemos tenido que instalar asi porque daba conflicto con la nueva versión de React. 
+no significa que vaya a fallar, puede ser que no se haya probado en esta nueva versión)
+
+
+VOy a https://console.cloud.google.com/
+ME creo un nuevo proyecto : astroturismo 
+
+Me voy a + HABILITAR  API y SERVICIOS Y BUSCO google maps : Elijo la opción Maps javascript api y la habilitamos.
+
+Hay un paquete bastante amplio de google gratis. SI no fuera ya gratis y tuvieramos que indicarle a dónde nos tendría q cobrar: vamos a Billing o Facturación , en el desplegable del menu
+
+
+
+La googleMapURL va a ser:
+
+ la clave la saco de la api del navegador, de APIy SERVICES --> CREDENCIALES. Crear credencial : API KEY Y LA METEMOS EN EL .ENV
+
+          <Map googleMapURL: `https://maps.googleapis.com/maps/api/js?v=3.exp&KEY=${MAPS_KEY}`></Map>
+
+
+ TAmbien tenemos que configurar la pantalla de consentimineto de OAuth

@@ -194,7 +194,7 @@ function EventForm({ event: eventToEdit = {} }) {
   return (
     <div className="row row-cols-1 pl-5 pr-5">
       <div className="col text-center mb-2">
-        <img className="img-fluid img-thumbnail bg-white border-warning text-warning" style={{ height: "15rem" }} src={event.image} alt={event.title} onError={(event) => event.target.src = 'https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_5_vfyuwg.png'} />
+        <img className="img-fluid img-thumbnail bg-white border-warning text-warning" style={{ height: "15rem" }} src={event.image && URL.createObjectURL(event.image) } alt={event.title} onError={(event) => event.target.src = 'https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_5_vfyuwg.png'} />
 
 
       </div>

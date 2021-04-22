@@ -25,10 +25,17 @@ npx create-react-app web
     "i18next": "^20.2.1",
     "react-i18next": "^11.8.12"
     "moment": "^2.29.1",
+    react-custom-scrollbars 
+    react-google-maps
 
 
   }
+ESTAS DOS DEPENDENCIAS LAS HE TENIDO QUE INSTALAR ASI ( con legacy-peer-deps porque había conflicto con mi versión de React. ESto no significa que no vaya a funcionar, 
+suele ser debido a que no se ha probado bien la librería en la nueva versión de REact )
 
+
+npm install react-custom-scrollbars --legacy-peer-deps 
+npm install react-google-maps  --legacy-peer-deps 
 
 index.js : Apenas se toca. Solo cuando instalemos el in tenemos que añadirlo en el index.js
 import './services/i18n-service'; // init i18n system

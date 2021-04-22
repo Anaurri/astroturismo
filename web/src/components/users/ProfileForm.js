@@ -42,10 +42,10 @@ function ProfileForm({ userBody: userToEdit = {} }) {
   const history = useHistory();
   const [state, setState] = useState({
     userBody: {
-      name: user.name,
-      city: user.city,
-      avatar: user.avatar,
-      phoneNumber: user.phoneNumber,
+      name: user?.name,
+      city: user?.city,
+      avatar: user?.avatar,
+      phoneNumber: user?.phoneNumber,
       ...userToEdit
 
 
@@ -102,8 +102,8 @@ function ProfileForm({ userBody: userToEdit = {} }) {
     if (isValid()) {
       try {
         const userData = { ...state.userBody };
-        await update(userData);
-        // onUserChange(userBody);
+        const user = await update(userData);
+        onUserChange(user);
 
         history.push(`/profile`, { id: userBody.id });
       } catch (error) {

@@ -33,7 +33,7 @@ module.exports.create = (req, res, next) => {
 
 module.exports.list = (req, res, next) => {
     Reservation.find({ client: req.user.id })
-        // .populate('event', 'name') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
+        .populate('event', 'name') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
         .then(reservations => {
             if (reservations) res.json(reservations)
             else next(createError(404, 'There is no reservation'))
