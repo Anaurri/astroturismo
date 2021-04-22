@@ -34,10 +34,6 @@ function EventItem({ event: { id, name, description, city, image, company, date,
       date: date,
       numberOfPeople: 3, //más adelante cambio esto y lo pongo como formulario
     }
-
-    console.log("en el handle reservationData")
-
-    console.log(reservationData)
     await reservationsService.create(reservationData);
     // onCreateReservation(id);
   }

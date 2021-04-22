@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 import EventsList from '../events/EventList'
 import NotificationsList from '../notifications/NotificationsList';
 import ReservationsList from '../reservations/ReservationsList';
+import ProfileForm from './ProfileForm';
+
 
 
 
@@ -15,8 +17,7 @@ import ReservationsList from '../reservations/ReservationsList';
 
 function UserProfile() {
     const { t } = useTranslation()
-    const { user, isAuthenticated, isCompany } = useContext(AuthContext);
-
+    const { user, isAuthenticated, isCompany } = useContext(AuthContext); 
     return (
 
         <Fragment>

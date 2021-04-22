@@ -4,7 +4,6 @@ const passport = require('passport');
 
 
 module.exports.register = (req, res, next) => {
-  console.log (req.body)
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
@@ -67,10 +66,6 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.update = (req, res, next) => {
-  
-  console.log ("estoy en el controlador y el body vale:")
-  console.log (req.body)
-
   
   const body = {
     id: req.user.id

@@ -2,7 +2,6 @@ import http from './base-api-service';
 
 const list = (notifications) => http.get('/notifications/me')
 const create = (notification) => {
-  console.log(notification);
   const data = new FormData()
 
   Object.keys(notification).forEach(key => {

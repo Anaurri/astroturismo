@@ -28,7 +28,6 @@ module.exports.create = (req, res, next) => {
     coordinates: location
   }
   req.body.company = req.user.id;
-  console.log(req.body.company)
 
   if (req.file) {
     req.body.image = req.file.url
@@ -47,9 +46,6 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.update = (req, res, next) => {
-  console.log("traza")
-
-  console.log(req.file)
 
   //desde react: El submit que llamará a este endpoint, se habilitará cuando rellene tambien la notificación con la alerta informada de que se ha cambiado el evento para enviarselo a  los usuarios.
   Event.findById(req.params.id)
@@ -104,8 +100,6 @@ module.exports.update = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-
-  console.log("entremos en el delete")
   const today = new Date(); //hoy en ms desde 1970
   Event.findById(req.params.id)
     .populate('reservations') //el mongoose no te trae el virtual por defecto si no se lo pides porque cuesta. De ahí el populate.

@@ -13,7 +13,6 @@ const session = require('./config/session.config');
 
 const app = express();
 
-console.log ('hola')
 
 /** Middlewares */
 app.use(express.json());

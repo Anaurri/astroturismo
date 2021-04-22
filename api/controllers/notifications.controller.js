@@ -14,7 +14,6 @@ module.exports.list = (req, res, next) => {
         .populate('sender', '_id name email') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
         .populate('recipient', '_id name email') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
         .then(notifications => {
-            console.log(notifications)
             if (notifications) res.json(notifications)
             else next(createError(404, 'There is no notifications'))
         })
@@ -29,16 +28,12 @@ module.exports.createMessage = (req, res, next) => {
     req.body.typeOfNotification = 'message'
     req.body.titleNotification= "You have a message"
 
-
-    console.log (req.body.event)
-
     /*Si no esta informado el reciver, le damos el id de company*/
     if (req.body.recipient == null) {
         return Event.findById(req.body.event)
             .then(event => {
                 if (event) {
                     req.body.recipient = event.company
-                    console.log (req.body)
                     return Notification.create(req.body)
                         .then(notification => res.status(201).json(notification))
                         .catch(error => {
@@ -71,7 +66,6 @@ module.exports.createNotice = (req, res, next) => {
             /*Buscamos las reservas por usuario y por fecha (a dos días del evento) */
             return Reservation.find({ $and: [{ client: req.user.id }, { date: { $lte: dayAfer2mrw } }] })
                 .then(reservations => {
-                    console.log(reservations.length)
                     if (reservations.length = 0) next(createError(404, 'Reservation not found'))
                     else {
                         const notifications = reservations.map(reservation => {

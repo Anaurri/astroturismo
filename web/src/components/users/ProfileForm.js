@@ -1,7 +1,9 @@
 
-import { useState } from 'react';
+import { useState , useContext } from 'react';
 import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../../contexts/AuthStore';
+
 // import { usersService } from '../../services/users-service'
 
 
@@ -31,17 +33,19 @@ const validations = {
   }
 }
 
-function ProfileForm({ user: userToEdit = {} }) {
+function ProfileForm({ userBody: userToEdit = {} }) {
+
+  const { user, isAuthenticated, onUserChange } = useContext(AuthContext);
 
   let preview
 
   const history = useHistory();
   const [state, setState] = useState({
-    user: {
-      name: '',
-      city: '',
-      avatar: '',
-      phoneNumber: '',
+    userBody: {
+      name: user.name,
+      city: user.city,
+      avatar: user.avatar,
+      phoneNumber: user.phoneNumber,
       ...userToEdit
 
 
@@ -60,8 +64,8 @@ function ProfileForm({ user: userToEdit = {} }) {
     return !Object.keys(errors).some(error => errors[error]);
   }
 
-  const handleBlur = (user) => {
-    const { name } = user.target;
+  const handleBlur = (userBody) => {
+    const { name } = userBody.target;
     setState(state => ({
       ...state,
       touch: {
@@ -71,19 +75,19 @@ function ProfileForm({ user: userToEdit = {} }) {
     }));
   }
 
-  const handleChange = (user) => {
-    let { name, value } = user.target;
+  const handleChange = (userBody) => {
+    let { name, value } = userBody.target;
 
-    if (user.target.files && user.target.files[0]) {
-      value = user.target.files[0]
-      preview = URL.createObjectURL(user.target.files[0])
+    if (userBody.target.files && userBody.target.files[0]) {
+      value = userBody.target.files[0]
+      preview = URL.createObjectURL(userBody.target.files[0])
 
     }
 
     setState(state => ({
       ...state,
-      user: {
-        ...state.user,
+      userBody: {
+        ...state.userBody,
         [name]: value
       },
       errors: {
@@ -92,14 +96,16 @@ function ProfileForm({ user: userToEdit = {} }) {
       }
     }));
   }
-  const handleSubmit = async (user) => {
-    user.preventDefault();
+  const handleSubmit = async (userBody) => {
+    userBody.preventDefault();
 
     if (isValid()) {
       try {
-        const userData = { ...state.user };
-        await update(userData)
-        history.push(`/profile`, { id: user.id });
+        const userData = { ...state.userBody };
+        await update(userData);
+        // onUserChange(userBody);
+
+        history.push(`/profile`, { id: userBody.id });
       } catch (error) {
         const { message, errors } = error.response?.data || error;
 
@@ -117,7 +123,7 @@ function ProfileForm({ user: userToEdit = {} }) {
       }
     }
   }
-  const { user, errors, touch } = state;
+  const { userBody, errors, touch } = state;
   const { t } = useTranslation()
 
 
@@ -125,7 +131,7 @@ function ProfileForm({ user: userToEdit = {} }) {
     <div className="row row-cols-1 pl-5 pr-5">
       <h3>Actualiza el perfil</h3>
       {/* <div className="col text-center mb-2">
-        <img className="img-fluid img-thumbnail bg-white border-warning text-warning"  style={{height: "15rem"}} src={user.avatar} alt={user.name} onError={(user) => user.target.src = user.avatar} />
+        <img className="img-fluid img-thumbnail bg-white border-warning text-warning"  style={{height: "15rem"}} src={userBody.avatar} alt={userBody.name} onError={(userBody) => user.target.src = user.avatar} />
       </div> */}
       <div className="col">
 
@@ -136,15 +142,8 @@ function ProfileForm({ user: userToEdit = {} }) {
 
           <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-user fa-fw"></i></span>
           <input type="text" name="name" className={`form-control border-warning bg-light text-white  ${touch.name && errors.name ? 'is-invalid' : ''}`}
-            placeholder="Username" onBlur={handleBlur} onChange={handleChange} value={user.name} />
+            placeholder="Username" onBlur={handleBlur} onChange={handleChange} value={userBody.name} />
           <div className="invalid-feedback">{errors.name}</div>
-
-
-
-
-
-
-
 
           <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-picture-o fa-fw"></i></span>
           <input type="file" name="avatar" className={`form-control border-warning bg-light text-white ${(touch.avatar && errors.avatar) ? 'is-invalid' : ''}`} placeholder="User avatar..."
@@ -169,12 +168,12 @@ function ProfileForm({ user: userToEdit = {} }) {
 
           <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-building fa-fw"></i></span>
           <input type="text" name="city" className={`form-control border-warning bg-light text-white ${touch.city && errors.city ? 'is-invalid' : ''}`}
-            placeholder="City" onBlur={handleBlur} onChange={handleChange} value={user.city} />
+            placeholder="City" onBlur={handleBlur} onChange={handleChange} value={userBody.city} />
           <div className="invalid-feedback">{errors.city}</div>
 
           <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-phone fa-fw"></i></span>
           <input type="number" name="phoneNumber" className={`form-control border-warning bg-light text-white ${(touch.phoneNumber && errors.phoneNumber) ? 'is-invalid' : ''}`} placeholder="Company phoneNumber..."
-            onBlur={handleBlur} onChange={handleChange} />
+            onBlur={handleBlur} onChange={handleChange} value={userBody.phoneNumber} />
           <div className="invalid-feedback">{errors.phoneNumber}</div>
         </div>
 

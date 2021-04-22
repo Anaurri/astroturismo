@@ -5,7 +5,6 @@ const Event = require('../models/event.model');
 const Reservation = require('../models/reservation.model')
 
 module.exports.create = (req, res, next) => {
-    console.log(req.body)
     Event.findById(req.params.id)
         .populate('reservations') //el mongoose no te trae el virtual por defecto si no se lo pides porque cuesta. De ahí el populate.
         .then(event => {

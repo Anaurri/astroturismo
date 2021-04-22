@@ -36,7 +36,6 @@ mongoose.connection.once('open', () => {
       console.info(`- Added ${lodges.length} lodges`)
       const eventsWithLodgesIds = eventsWithOwnerIds.map(event => {
         const lodgeEvent = lodges.find(lodge => lodge.urlLodge === event.lodge);
-        console.log (lodgeEvent)
         event.lodge = lodgeEvent?.id; //solo si tiene lodgevent el evento.
         return event;
       })
