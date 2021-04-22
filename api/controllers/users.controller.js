@@ -67,6 +67,11 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.update = (req, res, next) => {
+  
+  console.log ("estoy en el controlador y el body vale:")
+  console.log (req.body)
+
+  
   const body = {
     id: req.user.id
   }
@@ -76,8 +81,8 @@ module.exports.update = (req, res, next) => {
   if (req.body.description) {
     body.description = req.body.description
   }
-  if (req.body.phone) {
-    body.phone = req.body.phone
+  if (req.body.phoneNumber) {
+    body.phoneNumber = req.body.phoneNumber
   }
   if (req.body.contactEmail) {
     body.contactEmail = req.body.contactEmail

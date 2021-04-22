@@ -136,9 +136,9 @@ function RegisterForm() {
           placeholder="Password" onBlur={handleBlur} onChange={handleChange} value={user.password} />
         <div className="invalid-feedback">{errors.password}</div>
       </div>
-      <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" name="role" id="check1"  onBlur={handleBlur} onChange={handleChange} value='company'  disabled=""/>
-          <label class="custom-control-label" for="check1">{t('User.textToCompany')}</label>
+      <div className="custom-control custom-checkbox">
+          <input type="checkbox" className="custom-control-input" name="role" id="check1"  onBlur={handleBlur} onChange={handleChange} value='company'  disabled=""/>
+          <label className="custom-control-label" for="check1">{t('User.textToCompany')}</label>
         </div>
 
       <div className="d-grid gap-2">

@@ -27,12 +27,12 @@ function EventItem({ event: { id, name, description, city, image, company, date,
     onDeleteEvent(id);
   }
 
-  async function handleCreateReservation(id, numberOfPeople) {
+  async function handleCreateReservation(id) {
     const reservationData = {
       event: id,
       client: user.id,
       date: date,
-      numberOfPeople: numberOfPeople, //más adelante cambio esto y lo pongo como formulario
+      numberOfPeople: 3, //más adelante cambio esto y lo pongo como formulario
     }
 
     console.log("en el handle reservationData")
@@ -57,12 +57,12 @@ function EventItem({ event: { id, name, description, city, image, company, date,
         <hr className="bg-warning"></hr>
 
         <div className="card-body" >
-          <h6 className="card-title text-warning mt-2" style={{ height: "6rem" }}>{name}</h6>
+          <h6 className="card-title text-warning mt-2" style={{ height: "4rem" }}>{name}</h6>
           <hr className="bg-warning"></hr>
           <p className="card-text " style={{ height: "12rem", overflowY: "scroll" }}>{description}</p>
         </div>
         <div className="card-body" style={{ height: "7rem" }}>
-          <span className="fw-lighter text-primary" style={{ fontSize: '16px' }}>{date}</span>
+          <span className="fw-lighter text-primary" style={{ fontSize: '10px' }}>{date}</span>
           <h6 className="card-title text-primary">{price}€</h6>
           <h6 className="card-title">{city}</h6>
 
@@ -76,20 +76,20 @@ function EventItem({ event: { id, name, description, city, image, company, date,
         </div>
         {!isCompany() && (
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
-            <button type="button" className="btn btn-primary" onClick={() => handleCreateReservation(id, numberOfPeople)}>Reserva</button>
+            <button type="button" className="btn btn-primary" onClick={() => handleCreateReservation(id)}>Reserva</button>
 
 
             <form onSubmit={handleCreateReservation}>
-              <div class="btn-group">
-                <select class="btn-group btn-group-toggle btn btn-secondary active">
-                  <option type="number" name="numberOfPeople" selected="1">1</option>
+              <div className="btn-group">
+                <select className="btn-group btn-group-toggle btn btn-secondary active">
+                  {/* <option type="number" name="numberOfPeople" selected="1">1</option>
                   <option type="number" name="numberOfPeople" value="2">2</option>
                   <option type="number" name="numberOfPeople" value="3">3</option>
                   <option type="number" name="numberOfPeople" value="4">4</option>
                   <option type="number" name="numberOfPeople" value="5">5</option>
                   <option type="number" name="numberOfPeople" value="6">6</option>
                   <option type="number" name="numberOfPeople" value="7">7</option>
-                  <option type="number" name="numberOfPeople" value="8">8</option>
+                  <option type="number" name="numberOfPeople" value="8">8</option> */}
                 </select>
               </div>
             </form>
@@ -102,8 +102,8 @@ function EventItem({ event: { id, name, description, city, image, company, date,
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
             <button type="button" className="btn btn-danger" onClick={() => handleDeleteEvent(id)}>Delete</button>
 
-            <label class="btn btn-primary">
-              <a href="#" className="text-white" type="checkbox" autocomplete="off">Update</a>
+            <label className="btn btn-primary">
+            <button type="button" className="btn btn-danger" onClick={() => handleDeleteEvent(id)}>Update</button>
             </label>
           </div>
         )}

@@ -75,7 +75,6 @@ const validations = {
 }
 
 function EventForm({ event: eventToEdit = {} }) {
-
   const history = useHistory();
   const [state, setState] = useState({
     event: {
@@ -103,14 +102,17 @@ function EventForm({ event: eventToEdit = {} }) {
       longitude: validations.longitude(eventToEdit.longitude)
 
     },
+    preview: '',
     touch: {}
   });
 
   const handleChange = (event) => {
+    let preview;
     let { name, value } = event.target;
 
     if (event.target.files) {
-      value =  URL.createObjectURL(event.target.files[0])
+      value = event.target.files[0]
+      if (event.target.files[0]) preview = URL.createObjectURL(event.target.files[0])
     }
 
     setState(state => {
@@ -123,7 +125,8 @@ function EventForm({ event: eventToEdit = {} }) {
         errors: {
           ...state.errors,
           [name]: validations[name] && validations[name](value),
-        }
+        },
+        preview: preview,
       }
     });
   }
@@ -142,11 +145,17 @@ function EventForm({ event: eventToEdit = {} }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+
+
     if (isValid()) {
       try {
+
         const eventData = { ...state.event };
+
         eventData.location = [Number(eventData.longitude), Number(eventData.latitude)];
         eventData.tags = eventData.tags.split(',').map(tag => tag.trim()) || [];
+
+
         const event = eventData.id ? await eventsService.update(eventData) : await eventsService.create(eventData);
         history.push(`/events/${event.id}`);
       } catch (error) {
@@ -174,6 +183,8 @@ function EventForm({ event: eventToEdit = {} }) {
   }
 
   const isValid = () => {
+
+
     const { errors } = state;
     return !Object.keys(errors).some(error => errors[error]);
   }
@@ -183,7 +194,7 @@ function EventForm({ event: eventToEdit = {} }) {
   return (
     <div className="row row-cols-1 pl-5 pr-5">
       <div className="col text-center mb-2">
-        <img className="img-fluid img-thumbnail bg-white border-warning text-warning"  style={{height: "15rem"}}  src={event.image} alt={event.title} onError={(event) => event.target.src = 'https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_5_vfyuwg.png'} />
+        <img className="img-fluid img-thumbnail bg-white border-warning text-warning" style={{ height: "15rem" }} src={event.image} alt={event.title} onError={(event) => event.target.src = 'https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_5_vfyuwg.png'} />
 
 
       </div>

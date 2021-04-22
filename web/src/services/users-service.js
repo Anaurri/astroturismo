@@ -11,6 +11,16 @@ export const register = (user) => http.post('/register', user)
 
 export const logout = () => http.post('/logout')
 
-export const update = (user) => http.patch('/profile/update')
+/*Cuando tenemos FILES tenemos que enviar a la API un objeto como FormData*/
+export const update = (user) => {
 
-
+    const data = new FormData()
+  
+    Object.keys(user).forEach(key => {
+      if (Array.isArray(user[key])) {
+        user[key].forEach(value => data.append(`${key}[]`, value))
+      } else data.append(key, user[key])
+    })
+  
+    return http.patch('/profile/update', data)
+  }

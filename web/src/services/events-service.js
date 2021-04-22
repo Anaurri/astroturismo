@@ -2,8 +2,12 @@ import http from './base-api-service';
 
 const list = (events) => http.get('/events')
 const detail = (id) => http.get(`/events/${id}`)
+
+
+
+/*Cuando tenemos FILES tenemos que enviar a la API un objeto como FormData*/
 const create = (event) => {
-  console.log(event);
+
   const data = new FormData()
 
   Object.keys(event).forEach(key => {
@@ -14,6 +18,8 @@ const create = (event) => {
 
   return http.post(`/events`, data)
 }
+
+
 const update = (event) => http.patch(`/events/${event.id}`, event)
 const remove = (id) => http.delete(`/events/${id}`)
 

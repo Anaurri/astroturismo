@@ -24,12 +24,12 @@ function UserProfile() {
                 <div className="col-md-8">
                 {isAuthenticated() && (
 
-                    <div className="card shadow-sm border-white rounded bg-black shadow rounded overflow-hidden">
+                    <div className="card shadow-sm border-success rounded bg-black shadow rounded overflow-hidden">
                         <div className="px-4 pt-0 pb-4 cover">
                             <div className="media align-items-end profile-head">
                                 <div className="profile mr-3">
                                     <img src={user.avatar} alt="..." width="180" style={{ marginTop: '20px' }} className="rounded mb-2 img-thumbnail bg-white" />
-                                    <Link to="/update-profile" className="btn btn-outline-dark btn-sm btn-block">Edit profile</Link>
+                                    <Link to="/update-profile" className="btn btn-outline-dark btn-sm btn-block  border-success  text-success">Edit profile</Link>
                                 </div>
                                 <div className="media-body text-white">
                                     <h4 className="mt-0 text-white" >{user.name}</h4>
@@ -37,16 +37,16 @@ function UserProfile() {
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-light p-4 d-flex justify-content-end text-center">
+                        <div className="bg-light p-4 d-flex justify-content-start text-center">
                             <ul className="list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <h6 className="font-weight-bold mb-0 d-block text-white">Email</h6><small className="text-muted"> <i className="fas fa-user mr-1 text-white"></i>{user.email}</small>
+                                <li className="list-inline-item ">
+                                   <small className="text-muted"> <i className="fa fa-user text-success"></i>     {user.email}</small>
                                 </li>
                                 <li className="list-inline-item">
-                                    <h6 className="font-weight-bold mb-0 d-block text-white">Phone Number</h6><small className="text-muted"> <i className="fas fa-image mr-1"></i>{user.phone}</small>
+                                    <small className="text-muted"> <i className="fa fa-phone text-success"></i>   {user.phoneNumber}</small>
                                 </li>
                                 <li className="list-inline-item">
-                                    <h6 className="font-weight-bold mb-0 d-block text-white">City</h6><small className="text-muted"> <i className="fas fa-image mr-1"></i>{user.city}</small>
+                                   <small className="text-muted"> <i className="fa fa-building text-success"></i>    {user.city}</small>
                                 </li>
                             </ul>
                         </div>

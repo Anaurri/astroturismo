@@ -11,13 +11,6 @@ import { update } from '../../services/users-service';
 const PASSWORD_PATTERN = /^.{8,}$/;
 
 const validations = {
-  name: (value) => {
-    let message;
-    if (!value) {
-      message = 'An user name is required';
-    }
-    return message;
-  },
   password: (value) => {
     let message;
     if (!value) {
@@ -40,7 +33,7 @@ const validations = {
 
 function ProfileForm({ user: userToEdit = {} }) {
 
-
+  let preview
 
   const history = useHistory();
   const [state, setState] = useState({
@@ -55,7 +48,6 @@ function ProfileForm({ user: userToEdit = {} }) {
 
     },
     errors: {
-      name: validations.name(userToEdit.name),
       // password: validations.password(),
       // password2: validations.password2(),
 
@@ -82,8 +74,10 @@ function ProfileForm({ user: userToEdit = {} }) {
   const handleChange = (user) => {
     let { name, value } = user.target;
 
-    if (user.target.files) {
-      value = URL.createObjectURL(user.target.files[0])
+    if (user.target.files && user.target.files[0]) {
+      value = user.target.files[0]
+      preview = URL.createObjectURL(user.target.files[0])
+
     }
 
     setState(state => ({
@@ -129,9 +123,10 @@ function ProfileForm({ user: userToEdit = {} }) {
 
   return (
     <div className="row row-cols-1 pl-5 pr-5">
-      <div className="col text-center mb-2">
-        <img className="img-fluid img-thumbnail bg-white border-warning text-warning"  style={{height: "15rem"}} src={user.avatar} alt={user.name} onError={(user) => user.target.src = 'https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_4_hs7qxd.png'} />
-      </div>
+      <h3>Actualiza el perfil</h3>
+      {/* <div className="col text-center mb-2">
+        <img className="img-fluid img-thumbnail bg-white border-warning text-warning"  style={{height: "15rem"}} src={user.avatar} alt={user.name} onError={(user) => user.target.src = user.avatar} />
+      </div> */}
       <div className="col">
 
       <form onSubmit={handleSubmit}>
