@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { useHistory, useLocation } from "react-router";
 import { login } from "../../services/users-service"; //otra forma de exportar/importar varios endpoints. Mirar diferencia entre eventservices y usersservices.
 import { AuthContext } from '../../contexts/AuthStore';
+import { Link } from 'react-router-dom';
+
 
 function LoginForm() {
   const { onUserChange } = useContext(AuthContext);
@@ -66,7 +68,8 @@ function LoginForm() {
       <div className="d-grid gap-2">
         <button className="btn btn-primary" type="submit" >Login</button>
       </div>
-      
+      <Link className="link-unstyled card-header" to={`/register`}><h6 className="card-title text-white">Aún no tienes cuenta? Regístrate.</h6></Link>
+
     </form>
   );
 }

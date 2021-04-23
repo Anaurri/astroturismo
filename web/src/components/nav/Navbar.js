@@ -35,7 +35,7 @@ function Navbar() {
             <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/events">{t('Navbar.events')}</NavLink></li>
           </ul>
           <ul className="navbar-nav d-flex">
-          <li className="nav-item"><NavLink className="nav-link text-warning" to="/map"><i class="fa fa-globe" aria-hidden="true"></i></NavLink></li>
+          <li className="nav-item"><NavLink className="nav-link text-warning" to="/map"><i className="fa fa-globe" aria-hidden="true"></i></NavLink></li>
             {!isAuthenticated() && (
               <Fragment>
                 <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/login">{t('Navbar.login')}</NavLink></li>

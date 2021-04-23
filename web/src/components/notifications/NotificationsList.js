@@ -3,7 +3,7 @@ import notificationsService from '../../services/notifications-service';
 import { Fragment } from 'react';
 import NotificationItem from './NotificationItem';
 
-function NotificationsList({ minSearchChars, showFilter, companyId }) {
+function NotificationsList( ) {
 
     const [state, setState] = useState({
         notifications: [],

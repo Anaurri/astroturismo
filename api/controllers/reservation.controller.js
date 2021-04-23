@@ -13,14 +13,19 @@ module.exports.create = (req, res, next) => {
                 /* En react ya validará si hay plazas para poder reservar, pero aquí también tenemos que hacerlo.
                 SIEMPRE SE VALIDA EN LA API SI O SI.*/
                 const bookingsCount = event.reservations.reduce((total, reservation) => total + reservation.numberOfPeople, 0)
-                const availablePlace = event.capacity - (bookingsCount + req.body.numberOfPeople)
-
+                var availablePlace = event.capacity - (bookingsCount + Number(req.body.numberOfPeople))
                 if (availablePlace >= 0) {
                     req.body.date = event.date; //de momento la fecha de la reserva será la del evento. Más adelante un evento tendrá varias fechas
                     req.body.event = event.id;
+                    req.body.eventName = event.name;   /*Por el problema con el populate del evento, me guardo el name en el modelo de reservation*/
                     req.body.client = req.user.id;
+                    req.body.price = Number(event.price);  /*Por el problema con el populate del evento, me guardo el price en el modelo de reservation*/
+
+                    availablePlace = 0 /* Se queda un valor si no lo reseteo*/
                     return Reservation.create(req.body)
                         .then(reservation => {
+
+
                             res.status(201).json(reservation)
                         })
                 }
@@ -30,40 +35,22 @@ module.exports.create = (req, res, next) => {
         }).catch(next)
 
 }
-
 module.exports.list = (req, res, next) => {
     Reservation.find({ client: req.user.id })
-        .populate('event', 'name') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
+        // .populate('event', 'name') //Al listar con el populate, da 500:TypeError: Cannot read property 'coordinates' of undefined. Al crearse queda bien relacionado con el event
+        /*Para parchear esto , creamos en el modelo de reserva un eventName, y metemos el nombre del evento en la tabla de reservations.*/
         .then(reservations => {
             if (reservations) res.json(reservations)
             else next(createError(404, 'There is no reservation'))
         })
         .catch(next)
 }
-
-module.exports.detail = (req, res, next) => {
-    Reservation.find({$and: [{_id: req.params.id}, {client: req.user.id}]})
-        .populate('event', '_id name date city packWithLodge company') //de momento saco eso, si quiere ver más detalles sobre el lodge o precio etc...DETALLE DEL EVENTO.
-        .then(reservation => {
-            if (reservation.length > 0) res.json(reservation)
-            else next(createError(404, 'There is no reservation'))
-        })
+module.exports.updateState = (req, res, next) => {
+    const body = {
+        id: req.body.id,
+        paymentState: req.body.paymentState
+    }
+    Reservation.findByIdAndUpdate(req.body.id, body, { new: true })
+        .then(reservation => res.status(202).json(reservation))
         .catch(next)
 }
-
-module.exports.delete = (req, res, next) => {
-    Reservation.findById(req.params.id)
-      .then(reservation => {
-
-        const today = new Date(); //hoy en ms desde 1970
-        const dayAfer2mrw = new Date().setDate(today.getDate()+2) //hoy+2días  en ms desde 1970 
-        const reservationDate = reservation.date.getTime() //día de la reserva en ms desde 1970
-        if (!reservation) next(createError(404, 'Reservation not found'))
-        else if (reservation.client != req.user.id) next(createError(403, 'Only the owner of the reservation can perform this action'))
-        else if (reservationDate < dayAfer2mrw) next(createError(403, 'The reservation cannot be canceled two days before of the event'))
-        else return reservation.delete()
-          .then(() => res.status(204).end())  /*Tengo que devolver algo para que acabe la petición. En este caso ,
-          no queremos devolver un json. EN su lugar , devolveremos un .end*/
-      }).catch(next)
-  }
-  

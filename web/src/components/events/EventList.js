@@ -5,8 +5,6 @@ import EventItem from './EventItem';
 import EventsFilter from './EventsFilter';
 import MapScreen from '../../screens/MapScreen';
 
-const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_KEY}`
-
 function EventsList({ minSearchChars, showFilter, companyId }) {
 
   const [state, setState] = useState({
@@ -31,12 +29,8 @@ function EventsList({ minSearchChars, showFilter, companyId }) {
         events = events.filter(event => (event.company.id === companyId))
       }
 
-
       /* Marks para google maps */
-
       const locations = events.map(event => ([event.location[0], event.location[1]]))
-      console.log(locations);
-
 
       if (!isUnmounted) {
         setState({
@@ -57,7 +51,7 @@ function EventsList({ minSearchChars, showFilter, companyId }) {
       // componentWillUnmount
       isUnmounted = true;
     }
-  }, [search, minSearchChars]); // tiene como dependencia el buscador, para que siempre que cambie de valor se ejecute
+  }, [search, minSearchChars, companyId]); // tiene como dependencia el buscador, para que siempre que cambie de valor se ejecute
 
   const handleSearch = search => setSearch(search);
 
@@ -69,11 +63,11 @@ function EventsList({ minSearchChars, showFilter, companyId }) {
 
   }
 
-  const handleCreateReservation = id => {
-    setState(state => ({
-      ...state
-    }))
-  }
+  // const handleCreateReservation = id => {
+  //   setState(state => ({
+  //     ...state
+  //   }))
+  // }
 
   const { events, loading, locations } = state;
 
@@ -82,14 +76,14 @@ function EventsList({ minSearchChars, showFilter, companyId }) {
 
   return (
     <Fragment >
-      <div className="container pt-4 pb-5 bg-transparent border-warning  rounded overflow text-center" style={{ height: "420px" }}>
-        <MapScreen locations={locations} />
+      <div className="container pt-4 pb-5 bg-transparent border-warning  rounded overflow" style={{ height: "420px" }}>
+        <MapScreen className ="text-center" locations={locations} />
         <div className="container pt-4 pb-5 bg-transparent overflow auto" style={{ height: "800px", overflowY: "scroll" }}>
           {showFilter && (<EventsFilter className="mb-3" onSearch={handleSearch} loading={loading} />)}
 
-          <div className="row row-cols-3">
+          <div className="row row-cols-2">
             {events.map(event => (
-              <div key={event.id} className="col mb-4"><EventItem event={event} onDeleteEvent={handleDeleteEvent} onCreateReservation={handleCreateReservation}></EventItem></div>
+              <div key={event.id} className="col mb-4"><EventItem event={event} onDeleteEvent={handleDeleteEvent}></EventItem></div>
             ))}
           </div>
         </div>

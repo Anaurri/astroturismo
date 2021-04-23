@@ -35,7 +35,10 @@ const validations = {
 
 function ProfileForm({ userBody: userToEdit = {} }) {
 
-  const { user, isAuthenticated, onUserChange } = useContext(AuthContext);
+
+  const { user, isAuthenticated, onUserChange,  onReservationChange} = useContext(AuthContext);
+
+  onReservationChange(undefined); /*esta reserva queda cerrada. Ya no queremos tenerla en el storage. Le pasamos un vacio.*/ 
 
   let preview
 
@@ -80,7 +83,7 @@ function ProfileForm({ userBody: userToEdit = {} }) {
 
     if (userBody.target.files && userBody.target.files[0]) {
       value = userBody.target.files[0]
-      preview = URL.createObjectURL(userBody.target.files[0])
+      if (userBody.target.files[0]) preview = URL.createObjectURL(userBody.target.files[0])
 
     }
 
@@ -131,7 +134,9 @@ function ProfileForm({ userBody: userToEdit = {} }) {
     <div className="row row-cols-1 pl-5 pr-5">
       <h3>Actualiza el perfil</h3>
       {/* <div className="col text-center mb-2">
-        <img className="img-fluid img-thumbnail bg-white border-warning text-warning"  style={{height: "15rem"}} src={userBody.avatar} alt={userBody.name} onError={(userBody) => user.target.src = user.avatar} />
+      {/* <img className="img-fluid img-thumbnail bg-white border-warning text-warning" style={{ height: "15rem" }} src={userBody.avatar && URL.createObjectURL(userBody.avatar) } alt={userBody.name} onError={(userBody) => userBody.target.src  = 'https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_5_vfyuwg.png'} /> */}
+
+        {/* <img className="img-fluid img-thumbnail bg-white border-warning text-warning" src={ userBody.avatar}  alt={userBody.name}/>
       </div> */}
       <div className="col">
 

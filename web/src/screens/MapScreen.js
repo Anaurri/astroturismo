@@ -9,14 +9,14 @@ function MapScreen({locations}) {
 
   const { t } = useTranslation()
   return (
-    <div>
-         <Map class="text-center"
+    <Fragment>
+         <Map className="text-center"
             googleMapURL= {mapUrl}
-            containerElement= {<div className ="border-warning" style={{ marginLeft: '15rem',  height: '21rem' ,width: '33rem'}}/>} 
+            containerElement= {<div className ="border-warning" style={{height: '21rem' ,width: '33rem'}}/>} 
             mapElement=  {<div style={{height: '100%'}}/>}
             loadingElement= {<p>cargando...</p>}
             locations={locations} >  </Map>
-    </div>
+    </Fragment>
   );
 }
 

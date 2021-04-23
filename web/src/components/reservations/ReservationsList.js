@@ -3,7 +3,7 @@ import reservationsService from '../../services/reservations-service';
 import { Fragment } from 'react';
 import ReservationItem from './ReservationItem';
 
-  function ReservationsList({ }) {
+  function ReservationsList() {
 
     const [state, setState] = useState({
       reservations: [],
@@ -44,7 +44,7 @@ import ReservationItem from './ReservationItem';
         <div className="container pt-4 pb-5 bg-transparent overflow auto" style={{ height: "300px", overflowY: "scroll" }}>
           <div className="row row-cols-3 col-sm-">
             {reservations.map(reservation => (
-              <div key={reservation.id} className="col mb-4"><ReservationItem reservation={reservation}></ReservationItem></div>
+              <div className="col mb-4"><ReservationItem reservation={reservation}></ReservationItem></div>
             ))}
           </div>
 

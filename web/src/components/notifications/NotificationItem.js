@@ -1,14 +1,9 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthStore';
-import { useHistory } from 'react-router';
-import { createContext, useState, useCallback } from 'react';
-
-
-import { Link } from 'react-router-dom';
 
 function NotificationItem({ notification: { typeOfNotification, sender, recipient, event, textNotification, titleNotification } }) {
 
-    const { user, isAuthenticated, isCompany, onUserChange } = useContext(AuthContext);
+    const { user} = useContext(AuthContext);
     let header;
     let className;
     let senseOfMessage;
@@ -50,9 +45,6 @@ function NotificationItem({ notification: { typeOfNotification, sender, recipien
     //Si es sender y cliente, solo puede ser messages
     //Si es recipient y company: solo puede ser messages
     //Si es recipient y cliente: puede ser alerts, messages, o notices.
-
-
-    const history = useHistory();
     return (
         <div className="card mb-3 " >
             <div className= {className}>
@@ -61,7 +53,7 @@ function NotificationItem({ notification: { typeOfNotification, sender, recipien
                 <h4 className="alert-heading">{header}</h4>
                 <h5 >{titleNotification}</h5>
 
-                <p className="mb-0">{textNotification}<a href="#" className="alert-link">vel scelerisque nisl consectetur et</a>.</p>
+                <p className="mb-0">{textNotification}<a href="#" className="alert-link"> Contestar </a>.</p>
                 <h5 >{sender.name}</h5>
 
             </div>

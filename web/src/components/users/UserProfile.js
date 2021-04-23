@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { Fragment, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthStore';
 import { Link } from 'react-router-dom';
@@ -7,12 +6,7 @@ import { useTranslation } from 'react-i18next';
 import EventsList from '../events/EventList'
 import NotificationsList from '../notifications/NotificationsList';
 import ReservationsList from '../reservations/ReservationsList';
-import ProfileForm from './ProfileForm';
-
-
-
-
-
+import ProfileForm from '../users/ProfileForm';
 
 
 function UserProfile() {
@@ -51,6 +45,8 @@ function UserProfile() {
                                 </li>
                             </ul>
                         </div>
+                        <ProfileForm></ProfileForm>
+
                     </div>
                 )}
                 </div>

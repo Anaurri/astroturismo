@@ -1,8 +1,6 @@
 import { Fragment } from "react";
 import { useTranslation } from 'react-i18next';
-import EventsList from '../components/events/EventList';
-import Map from '../components/map/Map'
-
+import EventsList from '../components/events/EventList';  
 function Events() {
   const { t } = useTranslation()
   return (

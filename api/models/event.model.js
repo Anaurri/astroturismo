@@ -87,18 +87,6 @@ const eventSchema = new Schema({
         type: Number,
         default: 0
     }
-    // ,
-    // // meetingPoint: {
-    //     type: {
-    //         type: String,
-    //         enum: ['Point'],
-    //         default: 'Point'
-    //       },
-    //       coordinates: {
-    //         type: [Number],
-    //         required: 'The location of the event is required',
-    //       }
-    // },
 }, {
     timestamps: true,
     toJSON: {
@@ -107,7 +95,6 @@ const eventSchema = new Schema({
             delete ret.__v;
             ret.id = doc.id;
             ret.location = ret.location.coordinates;
-
             return ret;
         }
     }

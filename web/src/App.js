@@ -6,6 +6,7 @@ import ProfileForm from './components/users/ProfileForm';
 import MessageForm from './components/notifications/MessageForm';
 import MapScreen from './screens/MapScreen';
 
+
 import Notifications from './screens/Notifications';
 import Reservations from './screens/Reservations';
 
@@ -13,11 +14,11 @@ import Login from './screens/Login';
 import Register from './screens/Register';
 import Profile from './screens/Profile';
 import AuthStore from './contexts/AuthStore';
-import { AuthContext } from './contexts/AuthStore';
 
 import Error from './screens/Error';
 import AuthCallback from './screens/AuthCallback';
 import './App.css'
+import CardScreen from './screens/CardScreen';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
               <Route exact path="/notifications-list" component={Notifications} />
               <Route exact path="/reservations-list" component={Reservations} />
               <Route exact path="/reservation/:id" component={Reservations} />
+              <Route exact path="/payment" component={CardScreen} />
 
               <Route exact path="/404" component={() => <Error code={404} />} />
               <Route exact path="/403" component={() => <Error code={403} />} />

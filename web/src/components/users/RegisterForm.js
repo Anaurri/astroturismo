@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 
 
@@ -144,6 +145,9 @@ function RegisterForm() {
       <div className="d-grid gap-2">
         <button className="btn btn-primary" type="submit" disabled={!isValid()}>Register</button>
       </div>
+
+      <Link className="link-unstyled card-header" to={`/login`}><h6 className="card-title text-white">Ya estoy registrado</h6></Link>
+
 
 
     </form>

@@ -30,12 +30,13 @@ router.delete('/events/:id', secure.isAuthenticated, eventsController.delete); /
 
 router.post('/events/:id/reservations', secure.checkRole('client'), reservationController.create); //Postman ok
 router.get('/reservations', secure.isAuthenticated, reservationController.list);  //Postman ok
-router.get('/reservations/:id', secure.isAuthenticated, reservationController.detail);  //Postman ok
-router.delete('/reservations/:id', secure.isAuthenticated, reservationController.delete);
+// router.get('/reservations/:id', secure.isAuthenticated, reservationController.detail);  //Postman ok
+router.patch('/reservation/update', secure.isAuthenticated, reservationController.updateState);
 
 router.post('/notifications/notices', notificationsController.createNotice);  //Postman ok
 router.post('/notifications/message', secure.isAuthenticated, notificationsController.createMessage); //Postman ok
 router.get('/notifications/me', secure.isAuthenticated, notificationsController.list);  //Postman ok
+
 
 
 

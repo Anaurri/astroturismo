@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 export const currentUserStorageKey = 'current-user';
+export const currentReservationStorageKey = 'current-reservation';
+
 
 const http = axios.create({
   withCredentials: true,

@@ -20,3 +20,13 @@ La googleMapURL va a ser:
 
 
  TAmbien tenemos que configurar la pantalla de consentimineto de OAuth
+
+
+
+ --------------------------------------
+ 
+
+ Stripe. 
+ Nos creamos cuenta para conseguir la API KEY.
+ Hay dos api key, una pública y otra secreta. PAra la parte WEB cogemos la clave pública.Y no tenemos por que meterla en el .env
+ La otra API es más para backend
