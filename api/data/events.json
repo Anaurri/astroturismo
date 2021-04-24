@@ -3,6 +3,8 @@
     "name": "Observación de perseidas",
     "company": "noches.estrelladas@example.com",
     "description": "Obeservación de perseidas con guía y telescopio muy cerca de Segovia",
+    "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1619117977/astroturismo/wallpaper_f2gr4r.jpg",
+
     "tags": [
       "Perseidas",
       "Segovia"
@@ -18,7 +20,7 @@
     },
     "date": "03/01/2026",
     "duration": "90",
-    "capacity": 15,
+    "capacity": 10,
     "price": 10
   },
   {
@@ -56,15 +58,15 @@
     ],
     "lodge": "https://puertadelcampo.es/",
     "city": "La Granja de San Ildefonso, Segovia",
-    "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1618768759/astroturismo/background_3_f44ghi.jpg",
+    "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1619117679/astroturismo/wallpaperflare.com_wallpaper_sposeb.jpg",
     "location": {
       "type": "Point",
       "coordinates": [
-        40.900798,
-        -4.005967
+        40.367298,
+        -3.620950
       ]
     },
-    "date": "03/07/2026",
+    "date": "04/27/2021",
     "duration": "240",
     "capacity": 10,
     "price": 30
@@ -72,19 +74,15 @@
   {
     "name": "¡Lluvia de estrellas!",
     "company": "aprendiendo.estrellas@example.org",
-    "description": "Excursión a la sierra de Guadarrama para disfrutar de las lágrimas de San Lorenzo en un paraje incomparable, libre de contaminación lumínica",
-    "tags": [
-      "Perseidas",
-      "Segovia",
-      "La Granja de San Ildefonso"
-    ],
-    "lodge": "https://puertadelcampo.es/",
-    "city": "La Granja de San Ildefonso, Segovia",
+    "description": "Excursión a las afueras de Cartagena para observar el eclipse lunar, libre de contaminación lumínica",
+    "city": "Cartagena, Murcia",
+    "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1619116588/astroturismo/3-universe-filled-with-stars-nebula-and-galaxy-background-use-peerapun-jodking_hrfvwc.jpg",
+
     "location": {
       "type": "Point",
       "coordinates": [
-        40.900798,
-        -4.005967
+        37.605709,
+        -0.991310
       ]
     },
     "date": "03/07/2026",
@@ -118,20 +116,15 @@
   {
     "name": "Observación de estrellas",
     "company": "aprendiendo.estrellas@example.org",
-    "description": "Excursión al Cerro del Puerco.La excursión incluye un picnic de embutido y vino de la zona para cenar y la explicación y observación de las constelaciones a través de telescopio a manos del guía. ",
-    "tags": [
-      "Constelaciones",
-      "Segovia",
-      "La Granja de San Ildefonso"
-    ],
+    "description": "Visita guiada al museo nacional de astronomía ",
     "lodge": "https://puertadelcampo.es/",
-    "city": "La Granja de San Ildefonso, Segovia",
+    "city": "Sevilla",
     "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1618768759/astroturismo/background_3_f44ghi.jpg",
     "location": {
       "type": "Point",
       "coordinates": [
-        -2,
-        37.7
+        37.389091,
+        -5.984459
       ]
     },
     "date": "03/07/2026",
@@ -142,20 +135,14 @@
   {
     "name": "Observación de contelaciones",
     "company": "aprendiendo.estrellas@example.org",
-    "description": "Excursión al Cerro del Puerco.La excursión incluye un picnic de embutido y vino de la zona para cenar y la explicación y observación de las constelaciones a través de telescopio a manos del guía. ",
-    "tags": [
-      "Constelaciones",
-      "Segovia",
-      "La Granja de San Ildefonso"
-    ],
-    "lodge": "https://puertadelcampo.es/",
-    "city": "La Granja de San Ildefonso, Segovia",
-    "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1618768759/astroturismo/background_3_f44ghi.jpg",
+    "description": "Diodenoo de la pradera tiene musho peligro por la gloria de mi madre benemeritaar de la pradera. Al ataquerl mamaar me cago en tus muelas mamaar apetecan al ataquerl por la gloria de mi madre.  ",
+    "city": "Bilbao",
+    "image": "https://res.cloudinary.com/djzlb3fzs/image/upload/v1619113134/astroturismo/background_9.jpg.jpg",
     "location": {
       "type": "Point",
       "coordinates": [
-        -2,
-        37.7
+        43.263012,
+        -2.934985
       ]
     },
     "date": "03/07/2026",

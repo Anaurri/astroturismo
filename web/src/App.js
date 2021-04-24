@@ -25,7 +25,7 @@ function App() {
     <Router>
       <AuthStore>
         <Navbar />
-        <div className='bg'>
+        <div className='bg' style={{ backgroundColor:"#171721" }}>
           <div className="container pt-5 pb-5">
             <Switch>
               <Route exact path="/authenticate/google/cb" component={AuthCallback} />

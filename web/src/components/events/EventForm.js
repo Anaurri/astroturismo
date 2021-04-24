@@ -202,82 +202,82 @@ function EventForm({ event: eventToEdit = {} }) {
         <form onSubmit={handleSubmit}>
 
           <div className="input-group mb-2">
-            <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-tag fa-fw"></i></span>
-            <input type="text" name="name" className={`form-control border-warning bg-light text-white ${(touch.name && errors.name) ? 'is-invalid' : ''}`} placeholder="Event name..."
+            <span className="input-group-text bg-white border-warning text-warning"><i className="fa fa-tag fa-fw"></i></span>
+            <input type="text" name="name" className={`form-control border-warning bg-white text-white ${(touch.name && errors.name) ? 'is-invalid' : ''}`} placeholder="Event name..."
               value={event.name} onBlur={handleBlur} onChange={handleChange} />
             <div className="invalid-feedback">{errors.name}</div>
           </div>
 
           <div className="input-group mb-2">
-            <span className="input-group-text  bg-light border-warning text-warning"><i className="fa fa-edit fa-fw"></i></span>
-            <textarea name="description" className={`form-control border-warning bg-light text-white ${(touch.description && errors.description) ? 'is-invalid' : ''}`} placeholder="Event description..."
+            <span className="input-group-text  bg-white border-warning text-warning"><i className="fa fa-edit fa-fw"></i></span>
+            <textarea name="description" className={`form-control border-warning bg-white text-white ${(touch.description && errors.description) ? 'is-invalid' : ''}`} placeholder="Event description..."
               value={event.description} onBlur={handleBlur} onChange={handleChange}></textarea>
             <div className="invalid-feedback">{errors.description}</div>
           </div>
 
 
           <div className="input-group mb-2">
-            <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-picture-o fa-fw"></i></span>
-            <input type="file" name="image" className={`form-control border-warning bg-light text-white${(touch.image && errors.image) ? 'is-invalid' : ''}`} placeholder="Event image..."
+            <span className="input-group-text bg-white border-warning text-warning"><i className="fa fa-picture-o fa-fw"></i></span>
+            <input type="file" name="image" className={`form-control border-warning bg-white text-white${(touch.image && errors.image) ? 'is-invalid' : ''}`} placeholder="Event image..."
               onBlur={handleBlur} onChange={handleChange} />
             <div className="invalid-feedback">{errors.image}</div>
           </div>
 
           <div className="input-group mb-2">
-            <span className="input-group-text bg-light border-warning text-warning "><i className="fa fa-map-marker fa-fw"></i></span>
+            <span className="input-group-text bg-white border-warning text-warning "><i className="fa fa-map-marker fa-fw"></i></span>
 
-            <span className="input-group-text  bg-light border-warning text-warning">Latitude</span>
-            <input name="latitude" type="number" className={`form-control border-warning bg-light text-white ${(touch.latitude && errors.latitude) ? 'is-invalid' : ''}`}
+            <span className="input-group-text  bg-white border-warning text-light">Latitude</span>
+            <input name="latitude" type="number" className={`form-control border-warning bg-white text-white ${(touch.latitude && errors.latitude) ? 'is-invalid' : ''}`}
               value={event.latitude} onBlur={handleBlur} onChange={handleChange} />
 
-            <span className="input-group-text  bg-light border-warning text-warning">Longitude</span>
-            <input name="longitude" type="number" className={`form-control border-warning bg-light text-white ${(touch.longitude && errors.longitude) ? 'is-invalid' : ''}`}
+            <span className="input-group-text  bg-white border-warning text-light">Longitude</span>
+            <input name="longitude" type="number" className={`form-control border-warning bg-white text-white ${(touch.longitude && errors.longitude) ? 'is-invalid' : ''}`}
               value={event.longitude} onBlur={handleBlur} onChange={handleChange} />
 
             {touch.latitude && errors.latitude && <div className="invalid-feedback">{errors.latitude}</div>}
             {touch.longitude && errors.longitude && <div className="invalid-feedback">{errors.longitude}</div>}
 
-            <span className="input-group-text  bg-light border-warning text-warning"><i className="fa fa-building fa-fw"></i></span>
-            <input type="text" name="city" className={`form-control border-warning bg-light text-white${(touch.city && errors.city) ? 'is-invalid' : ''}`} placeholder="Event city..."
+            <span className="input-group-text  bg-white border-warning text-warning"><i className="fa fa-building fa-fw"></i></span>
+            <input type="text" name="city" className={`form-control border-warning bg-white text-white${(touch.city && errors.city) ? 'is-invalid' : ''}`} placeholder="Event city..."
               value={event.city} onBlur={handleBlur} onChange={handleChange} />
             <div className="invalid-feedback">{errors.city}</div>
 
           </div>
 
           <div className="input-group mb-2">
-            <span className="input-group-text  bg-light border-warning text-warning"><i className="fa fa-clock-o fa-fw"></i></span>
+            <span className="input-group-text  bg-white border-warning text-warning"><i className="fa fa-clock-o fa-fw"></i></span>
 
-            <span className="input-group-text  bg-light border-warning text-warning">Date</span>
-            <input type="datetime-local" name="date" className={`form-control border-warning bg-light text-white ${(touch.date && errors.date) ? 'is-invalid' : ''}`} placeholder="dd/mm/yyyy hh:mm"
+            <span className="input-group-text  bg-white border-warning text-light">Date</span>
+            <input type="datetime-local" name="date" className={`form-control border-warning bg-white text-white ${(touch.date && errors.date) ? 'is-invalid' : ''}`} placeholder="dd/mm/yyyy hh:mm"
               value={event.date} onBlur={handleBlur} onChange={handleChange} />
 
-            <span className="input-group-text  bg-light border-warning text-warning">Duration</span>
-            <input name="duration" type="number" className={`form-control border-warning bg-light text-white ${(touch.duration && errors.duration) ? 'is-invalid' : ''}`} placeholder="Duration aprox of the event in minutes..."
+            <span className="input-group-text  bg-white border-warning text-light">Duration</span>
+            <input name="duration" type="number" className={`form-control border-warning bg-white text-white ${(touch.duration && errors.duration) ? 'is-invalid' : ''}`} placeholder="Duration aprox of the event in minutes..."
               value={event.duration} onBlur={handleBlur} onChange={handleChange} />
 
             {touch.date && errors.date && <div className="invalid-feedback">{errors.date}</div>}
             {touch.duration && errors.duration && <div className="invalid-feedback">{errors.duration}</div>}
 
 
-            <span className="input-group-text  bg-light border-warning text-warning"><i className="fa fa-users fa-fw"></i></span>
-            <input type="number" name="capacity" className={`form-control  border-warning bg-light text-white ${(touch.capacity && errors.capacity) ? 'is-invalid' : ''}`} placeholder="Event capacity..."
+            <span className="input-group-text  bg-white border-warning text-warning"><i className="fa fa-users fa-fw"></i></span>
+            <input type="number" name="capacity" className={`form-control  border-warning bg-white text-white ${(touch.capacity && errors.capacity) ? 'is-invalid' : ''}`} placeholder="Event capacity..."
               value={event.capacity} onBlur={handleBlur} onChange={handleChange} />
             <div className="invalid-feedback">{errors.capacity}</div>
 
-            <span className="input-group-text   bg-light border-warning text-warning"><i className="fa fa-eur fa-fw"></i></span>
-            <input type="number" name="price" className={`form-control border-warning bg-light text-white ${(touch.price && errors.price) ? 'is-invalid' : ''}`} placeholder="Event price per person..."
+            <span className="input-group-text   bg-white border-warning text-warning"><i className="fa fa-eur fa-fw"></i></span>
+            <input type="number" name="price" className={`form-control border-warning bg-white text-white ${(touch.price && errors.price) ? 'is-invalid' : ''}`} placeholder="Event price per person..."
               value={event.price} onBlur={handleBlur} onChange={handleChange} />
             <div className="invalid-feedback">{errors.price}</div>
           </div>
           <div className="input-group mb-2">
-            <span className="input-group-text   bg-light border-warning text-warning"><i className="fa fa-tag fa-fw"></i></span>
-            <input type="text" name="tags" className={`form-control border-warning bg-light text-white ${(touch.tags && errors.tags) ? 'is-invalid' : ''}`} placeholder="Coma separated event tags..."
+            <span className="input-group-text   bg-white border-warning text-warning"><i className="fa fa-tag fa-fw"></i></span>
+            <input type="text" name="tags" className={`form-control border-warning bg-white text-white ${(touch.tags && errors.tags) ? 'is-invalid' : ''}`} placeholder="Coma separated event tags..."
               value={event.tags} onBlur={handleBlur} onChange={handleChange} />
             <div className="invalid-feedback">{errors.tags}</div>
           </div>
 
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary" disabled={!isValid()}>
+            <button type="submit" className="btn btn-warning" disabled={!isValid()}>
               {event.id && <span>Update Event</span>}
               {!event.id && <span>Create Event</span>}
             </button>

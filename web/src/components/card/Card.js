@@ -92,17 +92,17 @@ const Card = () => {
           <h5>Su reserva se ha realizado con éxito. Puede pagar ahora o más adelante</h5>
           <Link className="link-unstyled card-header text-white my-2" to={`/events`}><h6>Pagar más tarde. Volver a página principal</h6></Link>
 
-          <form onSubmit={handleSubmit} className="card card-body" style={{ width: "30rem" }}>
-            <h5>Resumen del pago:</h5>
-            <p> Booking    "{reservationBody?.eventName}" x {reservationBody?.numberOfPeople} </p>
+          <form onSubmit={handleSubmit} className="card card-body bg-white" style={{ width: "30rem" }}>
+            <h5 className ="text-light">Resumen del pago:</h5>
+            <p className ="text-light"> Booking    "{reservationBody?.eventName}" x {reservationBody?.numberOfPeople} </p>
 
-            <i className="fa fa-ticket" aria-hidden="true"></i> <h5 className="text-white"> Total:  EUR {totalToPay} </h5>
-            <p> Incluye impuestos (21%) EUR {totalToPay * 0.21} </p>
-            <div className="container bg-white text-center pt-4 pb-4" style={{ width: "20rem", heigth: "40rem" }}>
+            <h5 className ="text-light"> Total:  EUR {totalToPay} </h5>
+            <p className ="text-light"> Incluye impuestos (21%) EUR {totalToPay * 0.21} </p>
+            <div className="container bg-white text-center text-light pt-4 pb-4" style={{ width: "20rem", heigth: "40rem" }}>
               <div className="form-group ">
-                <CardElement claseeName="form-control text-white" />
+                <CardElement claseeName="form-control text-light" />
               </div>
-              <button className="btn btn-primary">Buy</button>
+              <button className="btn btn-warning">Buy</button>
             </div>
 
           </form>

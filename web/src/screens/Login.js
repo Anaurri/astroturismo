@@ -6,7 +6,6 @@ function Login() {
     <div className="row mt-5" style={{height: 'device-height' , width:"100%"}} >
       <div className="col-12 col-sm-4 mx-auto">
         <LoginForm />
-        <hr/>
         <div className="d-grid gap-2">
           {/* <a className="btn btn-danger" href={socialLoginUrl}><i className="fa fa-google"></i> Login with Google</a> */}
         </div>
