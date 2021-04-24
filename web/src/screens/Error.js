@@ -20,7 +20,7 @@ function Error({ code }) {
   return (
     <div className="row text-center row-cols-1">
       <div className="col"><img src={errorImage} className="img-fluid rounded" alt={`Error ${code}`} /></div>
-      <div className="col mt-5"><Link className="btn btn-link link-unstyled" to="/events"> <i className="fa fa-search" /> Find Awesome Events!</Link></div>
+      <div className="col mt-5"><Link className="btn btn-link link-unstyled" to="t"> <i className="fa fa-search" /> Find Awesome Events!</Link></div>
     </div>
   )
 }

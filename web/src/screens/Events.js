@@ -1,8 +1,11 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { useTranslation } from 'react-i18next';
 import EventsList from '../components/events/EventList';  
+import AuthContext from '../contexts/AuthStore';  
+
 function Events() {
   const { t } = useTranslation()
+
   return (
     <Fragment>
          <h3 className="mb-3">{t('Events.title')}</h3>

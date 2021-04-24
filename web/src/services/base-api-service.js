@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const currentUserStorageKey = 'current-user';
 export const currentReservationStorageKey = 'current-reservation';
+export const currentStartSessionStorageKey = 'current-start-session'
 
 
 const http = axios.create({

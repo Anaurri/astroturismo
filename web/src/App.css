@@ -42,12 +42,16 @@ height: 100%;
 .bg {
 
 
-background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619117679/astroturismo/wallpaperflare.com_wallpaper_sposeb.jpg');
+/* background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619117679/astroturismo/wallpaperflare.com_wallpaper_sposeb.jpg'); */
 
 /* background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619117977/astroturismo/wallpaper_f2gr4r.jpg'); */
-height: 150vmin;
+
+/* background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619262191/astroturismo/frimamento4_oi82ef.jpg'); */
+background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619262191/astroturismo/frimamento2_lyu0lr.jpg');
+
+height: 400vmin;
 
 background-repeat: repeat;
-background-size: cover;
+/* background-size: cover; */
 
 }

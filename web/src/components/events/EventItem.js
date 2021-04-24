@@ -10,7 +10,6 @@ import reservationsService from '../../services/reservations-service'
 function EventItem({ event: { id, name, description, city, image, company, date, price }, onDeleteEvent }) {
 
   const { user, isAuthenticated, isCompany, onReservationChange } = useContext(AuthContext);
-
   const history = useHistory();
 
   async function handleDeleteEvent(id) {
@@ -91,7 +90,7 @@ function EventItem({ event: { id, name, description, city, image, company, date,
         </div>
         <hr className="bg-warning"></hr>
 
-        <img src={image} className="card-img-top " alt={name} style={{ height: "15rem" }} />
+        <img src={image} className="card-img-top pl-5" alt={name} style={{ height: "15rem", width: "25rem"}} />
         <hr className="bg-warning"></hr>
 
         <div className="card-body" >

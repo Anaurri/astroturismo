@@ -4,7 +4,7 @@ import Events from './screens/Events';
 import EventForm from './components/events/EventForm';
 import ProfileForm from './components/users/ProfileForm';
 import MessageForm from './components/notifications/MessageForm';
-import MapScreen from './screens/MapScreen';
+// import MapScreen from './screens/MapScreen';
 
 
 import Notifications from './screens/Notifications';
@@ -37,7 +37,7 @@ function App() {
               <Route exact path="/update-profile" component={ProfileForm} />
               <Route exact path="/create-event" component={EventForm} />
               <Route exact path="/events" component={Events} />
-              <Route exact path="/map" component={MapScreen} />
+              {/* <Route exact path="/map" component={MapScreen} /> */}
               <Route exact path="/create-message" component={MessageForm} />
               <Route exact path="/notifications-list" component={Notifications} />
               <Route exact path="/reservations-list" component={Reservations} />
