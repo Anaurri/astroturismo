@@ -20,7 +20,7 @@ function Navbar() {
 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container">
         <Link className="navbar-brand" to="/events">
         <img src={logo} alt="Logo" width="48" height="40" style={{ paddingRight: '10px'}}  className="d-inline-block align-middle"/>

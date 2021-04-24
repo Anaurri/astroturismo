@@ -5,8 +5,7 @@ import NotificationsList from '../components/notifications/NotificationsList';
 function Notifications() {
   const { t } = useTranslation()
   return (
-    <Fragment>
-         <h3 className="mb-3">Notificaciones</h3>
+    <Fragment className ="mt-5">
          <NotificationsList/>
     </Fragment>
   );

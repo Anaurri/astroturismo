@@ -50,7 +50,7 @@ function LoginForm() {
   const { user, errors } = state;
 
   return (
-    <form className="mt-3 mb-3 pr-3 pt-3 pl-3 bg-white  border-warning rounded text-center" onSubmit={handleSubmit}>
+    <form className="mt-3 mb-3 pr-3 pt-3 pl-3 bg-white  border-warning rounded text-center"  onSubmit={handleSubmit}>
 
       <div className="input-group mb-2">
         <span className="input-group-text"><i className="fa fa-envelope fa-fw text-warning"></i></span>

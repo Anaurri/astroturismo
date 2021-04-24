@@ -64,7 +64,7 @@ function EventItem({ event: { id, name, description, city, image, company, date,
       onReservationChange(reservationBody)
       history.push('/payment');
 
-    } catch (error) { 
+    } catch (error) {
       const { message, errors } = error.response ? error.response.data : error;
       console.error(message);
       setState(state => ({
@@ -76,64 +76,50 @@ function EventItem({ event: { id, name, description, city, image, company, date,
     }
   }
 
-  const { reservation, errors,  message} = state;
+  const { reservation, errors, message } = state;
 
   /*Fin Crear Reserva*/
 
   return (
     <div className="card mb-3">
 
-      <div className="card shadow-sm bg-gray-dark border-warning rounded " style={{ height: "50rem", overflowY: "hide" }} >
+      <div className="card shadow-sm border-warning rounded  bg-white" style={{ color: "#171721" }} >
+        
+        
+        <h6 className="fw-lighter mt-3 ml-3 " style={{ fontSize: '12px' }}>{date.slice(0,10)}</h6>
+        <h5 className="card-title mt-1 ml-3 mr-2" >{name}, {city}</h5>
 
-        <h5 className="card-title text-white mt-2 ml-3 mr-2" style={{ height: "1rem" }} >{name}, {city}</h5>
-        <div className="card-body">
-        </div>
-        <hr className="bg-warning"></hr>
-
-        <img src={image} className="card-img-top pl-5" alt={name} style={{ height: "15rem", width: "25rem"}} />
-        <hr className="bg-warning"></hr>
-
+        <img src={image} className="card-img-top" alt={name} style={{ height: "20rem" }} />
         <div className="card-body" >
-          <p className="card-text " style={{ height: "8rem", overflowY: "scroll" }}>{description}</p>
-        </div>
-        <div className="card-body" style={{ height: "7rem" }}>
-          <span className="fw-lighter text-primary" style={{ fontSize: '10px' }}>{date}</span>
-          <h6 className="card-title text-primary">{price}€</h6>
-          <h6 className="card-title">{city}</h6>
-
-
-        </div>
-        {/* <button className="btn btn-primary" type="submit" disabled={!isValid()}>Register</button> */}
-
-        <div className="card-footer text-ligth">
-          <div>Escribe a la compañía:</div>
-          <Link className="link-unstyled card-header" to={`/create-message/${id}`}><h6 className="card-title text-white">{company.email}</h6></Link>
+          <p className="card-text ">{description}</p>
         </div>
 
-        {!isCompany() && isAuthenticated() &&(
+        {!isCompany() && isAuthenticated() && (
 
 
           <form onSubmit={handleSubmit}>
-            <div className="btn-group btn-group-toggle" data-toggle="buttons">
-              <div className="btn-group">
 
-            <input name="numberOfPeople" type="number" className="btn-group btn-group-toggle btn btn-secondary active"
-              value={reservation.numberOfPeople} onBlur={handleBlur} onChange={handleChange} />
+            <div className="btn-group ml-4 mr-4 mb-4 d-flex justify-content-center" style= {{ borderStyle: "solid" , borderWidth: '1px' , borderColor: '#000000'}} >
+            <span className="input-group-text bg-white text-light"> {price}€/person </span>         
 
-
-              </div>
-              <button className="btn btn-primary" type="submit">Reserva</button>
-              <div className="text-danger"> {message}</div>
-
-
+              <span className="input-group-text bg-white"> <i className="fa fa-user fa-fw" style={{ color: "#171721" }}></i></span>
+              <input name="numberOfPeople" type="number" className="input-group-text bg-white text-light" style={{ width: "80px" }}
+                value={reservation.numberOfPeople} onBlur={handleBlur} onChange={handleChange} />
+            <Link className="mt-2 d-flex align-items-center" to={{ pathname: `mail://${company.email}`}} target="_blank"><h6 className="card-title text-ligth">{company.email}</h6></Link>
 
             </div>
+            <div className="d-grid">
+              <button className="btn btn-warning " type="submit">Reserva</button>
+              <div className="text-danger"> {message}</div>
+            </div>
+
+
           </form>
 
         )}
         {!isAuthenticated() && (
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                <Link className="link-unstyled card-header" to={`/login`}><h6 className="card-title text-white">Autentícate para reservar una experiencia!</h6></Link>
+            <Link className="link-unstyled card-header" to={`/login`}><h6 className="card-title text-white">Autentícate para reservar una experiencia!</h6></Link>
           </div>
 
         )}
@@ -143,8 +129,8 @@ function EventItem({ event: { id, name, description, city, image, company, date,
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
             <button type="button" className="btn btn-danger" onClick={() => handleDeleteEvent(id)}>Delete</button>
 
-            <label className="btn btn-primary">
-              <button type="button" className="btn btn-danger" onClick={() => handleDeleteEvent(id)}>Update</button>
+            <label className="btn btn-warning">
+              <button type="button" className="btn btn-warning" onClick={() => handleDeleteEvent(id)}>Update</button>
             </label>
           </div>
         )}

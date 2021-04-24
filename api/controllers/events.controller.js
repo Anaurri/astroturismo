@@ -119,7 +119,7 @@ module.exports.delete = (req, res, next) => {
               date: today,
               // textNotification: req.body.textNotification,
               textNotification: "este texto luego lo tendrá que rellenar el usuario",
-              titleNotification: `El evento '${event.name}' para el día ${event.date} se ha cancelado`
+              titleNotification: `El evento '${event.name}' para el día ${event.date.toLocaleDateString()} se ha cancelado`
             }
             return Notification.create(notification) /*Aqui no creamos las notificaciones. SOlo creamoS la query , y cuando pongamos el .then en el Promise.all será cuando se creen en BBDD. EL return de esta línea es por el map*/
           })

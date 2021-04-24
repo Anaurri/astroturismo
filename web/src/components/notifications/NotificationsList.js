@@ -3,7 +3,7 @@ import notificationsService from '../../services/notifications-service';
 import { Fragment } from 'react';
 import NotificationItem from './NotificationItem';
 
-function NotificationsList( ) {
+function NotificationsList() {
 
     const [state, setState] = useState({
         notifications: [],
@@ -37,24 +37,28 @@ function NotificationsList( ) {
             // componentWillUnmount
             isUnmounted = true;
         }
-    }, []); 
+    }, []);
 
 
-const { notifications, loading } = state;
+    const { notifications, loading } = state;
 
-return (
-    <Fragment >
-        <div className="container pt-4 pb-5 bg-transparent overflow auto" style={{ height: "800px", overflowY: "scroll" }}>
-            <div className="row row-cols-1 col-sm-">
-                {notifications.map(notification => (
-                    <div key={notification.id} className="col mb-4"><NotificationItem notification={notification}></NotificationItem></div>
-                ))}
-            </div>
+    return (
+        <Fragment >
+            {notifications.length != 0 && (
+                <div className ="mt-5">
+                    <h5 className="text-warning text-center" >Tus notificaciones</h5>
+                    <div className="container pt-4 pb-5 bg-transparent overflow auto">
+                        <div className="row row-cols-2 col-sm-">
+                            {notifications.map(notification => (
+                                <div key={notification.id} className="col mb-4"><NotificationItem notification={notification}></NotificationItem></div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </Fragment>
 
-        </div>
-    </Fragment>
-
-)
+    )
 }
 export default NotificationsList;
 

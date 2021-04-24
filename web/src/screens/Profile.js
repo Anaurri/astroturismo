@@ -22,9 +22,7 @@ function Profile() {
 
   const { t } = useTranslation()
   return (
-    <Fragment>
-      <h3 className="mb-3">{t('User.title')}</h3>
-
+    <Fragment >
       <UserProfile />
     </Fragment>
   );

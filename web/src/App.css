@@ -47,11 +47,11 @@ height: 100%;
 /* background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619117977/astroturismo/wallpaper_f2gr4r.jpg'); */
 
 /* background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619262191/astroturismo/frimamento4_oi82ef.jpg'); */
+
+height: 'device-height';
+width:100%;
+
 background-image:  url('https://res.cloudinary.com/djzlb3fzs/image/upload/v1619262191/astroturismo/frimamento2_lyu0lr.jpg');
-
-height: 400vmin;
-
 background-repeat: repeat;
-/* background-size: cover; */
 
 }

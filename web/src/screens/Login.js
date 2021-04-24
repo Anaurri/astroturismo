@@ -3,7 +3,7 @@ import LoginForm from '../components/users/LoginForm';
 
 function Login() {
   return (
-    <div className="row">
+    <div className="row mt-5" style={{height: 'device-height' , width:"100%"}} >
       <div className="col-12 col-sm-4 mx-auto">
         <LoginForm />
         <hr/>

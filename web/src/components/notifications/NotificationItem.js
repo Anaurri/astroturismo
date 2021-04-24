@@ -10,14 +10,14 @@ function NotificationItem({ notification: { typeOfNotification, sender, recipien
 
     switch (typeOfNotification) {
         case 'alert':
-            header = 'ALERTA!'
+            header = 'Evento cancelado'
             if (user?.id === sender.id) {
                 senseOfMessage = "Enviado: "
-                className = "alert alert-dismissible  border-alert alert-secondary"
+                className = "text-danger"
             }
             else{
                 senseOfMessage = "Recibido: "
-                className = "alert alert-dismissible  border-alert alert-secondary"
+                className = "bg-white  alert-secondary text-danger"
             }
             break;
         case 'message':
@@ -46,16 +46,11 @@ function NotificationItem({ notification: { typeOfNotification, sender, recipien
     //Si es recipient y company: solo puede ser messages
     //Si es recipient y cliente: puede ser alerts, messages, o notices.
     return (
-        <div className="card mb-3 " >
-            <div className= {className}>
-                <button type="button" className="close" data-dismiss="alert">&times;</button>
-                <h4>{senseOfMessage}</h4>
-                <h4 className="alert-heading">{header}</h4>
-                <h5 >{titleNotification}</h5>
-
-                <p className="mb-0">{textNotification}<a href="#" className="alert-link"> Contestar </a>.</p>
-                <h5 >{sender.name}</h5>
-
+        <div className="card  border-warning  bg-white text-light " >
+            <div className= "text-light p-2">
+                <h6 className={className}>{header}</h6>
+                <p>{titleNotification}</p>
+                <p >{sender.name}</p>
             </div>
         </div>
     )

@@ -15,10 +15,10 @@ function EventsFilter({ className, onSearch, loading }) {
       <div className="col">
         <div className="input-group mb-2">
 
-          <input type="text" name="title" className="card shadow-sm bg-light border-warning rounded shadow rounded overflow-hidden text-white form-control" placeholder="Search by title..."
+          <input type="text" name="title" className="card shadow-sm bg-white border-warning rounded shadow rounded overflow-hidden text-white form-control" placeholder="Search by title..."
             value={search} onChange={handleChange} />
-                      <span className="input-group-text ">
-            <i className={`fa fa-${loading ? 'refresh fa-spin': 'search'} text-warning`}></i>
+                      <span className="input-group-text bg-warning">
+            <i className={`fa fa-${loading ? 'refresh fa-spin': 'search'} text-white`}></i>
           </span>
         </div>
       </div>

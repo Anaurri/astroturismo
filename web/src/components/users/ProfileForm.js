@@ -131,13 +131,7 @@ function ProfileForm({ userBody: userToEdit = {} }) {
 
 
   return (
-    <div className="row row-cols-1 pl-5 pr-5">
-      <h3>Actualiza el perfil</h3>
-      {/* <div className="col text-center mb-2">
-      {/* <img className="img-fluid img-thumbnail bg-white border-warning text-warning" style={{ height: "15rem" }} src={userBody.avatar && URL.createObjectURL(userBody.avatar) } alt={userBody.name} onError={(userBody) => userBody.target.src  = 'https://res.cloudinary.com/djzlb3fzs/image/upload/v1618507467/astroturismo/logo_pack2_5_vfyuwg.png'} /> */}
-
-        {/* <img className="img-fluid img-thumbnail bg-white border-warning text-warning" src={ userBody.avatar}  alt={userBody.name}/>
-      </div> */}
+    <div className="row row-cols-1 pl-5 pr-5 mb-3">
       <div className="col">
 
       <form onSubmit={handleSubmit}>
@@ -145,46 +139,33 @@ function ProfileForm({ userBody: userToEdit = {} }) {
       <div className="input-group mb-2">
 
 
-          <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-user fa-fw"></i></span>
-          <input type="text" name="name" className={`form-control border-warning bg-light text-white  ${touch.name && errors.name ? 'is-invalid' : ''}`}
+          <span className="input-group-text bg-white border-warning text-warning"><i className="fa fa-user fa-fw"></i></span>
+          <input type="text" name="name" className={`form-control border-warning bg-white text-light  ${touch.name && errors.name ? 'is-invalid' : ''}`}
             placeholder="Username" onBlur={handleBlur} onChange={handleChange} value={userBody.name} />
           <div className="invalid-feedback">{errors.name}</div>
 
-          <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-picture-o fa-fw"></i></span>
-          <input type="file" name="avatar" className={`form-control border-warning bg-light text-white ${(touch.avatar && errors.avatar) ? 'is-invalid' : ''}`} placeholder="User avatar..."
+          <span className="input-group-text bg-white border-warning text-warning"><i className="fa fa-picture-o fa-fw"></i></span>
+          <input type="file" name="avatar" className={`form-control border-warning bg-white text-light ${(touch.avatar && errors.avatar) ? 'is-invalid' : ''}`} placeholder="User avatar..."
             onBlur={handleBlur} onChange={handleChange} />
           <div className="invalid-feedback">{errors.avatar}</div>
         </div>
-
-        {/* <div className="input-group mb-2">
-        <span className="input-group-text"><i className="fa fa-lock fa-fw"></i></span>
-        <input type="password" name="password" className={`form-control ${touch.password && errors.password ? 'is-invalid' : ''}`}
-          placeholder="Password" onBlur={handleBlur} onChange={handleChange} value={user.password} />
-        <div className="invalid-feedback">{errors.password}</div>
-
-        {/* <input type="password2" name="password2" className={`form-control ${touch.password2 && errors.password2 ? 'is-invalid' : ''}`}
-          placeholder="New Password" onBlur={handleBlur} onChange={handleChange} value={user.password2} />
-        <div className="invalid-feedback">{errors.password2}</div> */}
-        {/* </div> */}
-
-
         <div className="input-group mb-2">
 
 
-          <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-building fa-fw"></i></span>
-          <input type="text" name="city" className={`form-control border-warning bg-light text-white ${touch.city && errors.city ? 'is-invalid' : ''}`}
+          <span className="input-group-text bg-white border-warning text-warning"><i className="fa fa-building fa-fw"></i></span>
+          <input type="text" name="city" className={`form-control border-warning bg-white text-light ${touch.city && errors.city ? 'is-invalid' : ''}`}
             placeholder="City" onBlur={handleBlur} onChange={handleChange} value={userBody.city} />
           <div className="invalid-feedback">{errors.city}</div>
 
-          <span className="input-group-text bg-light border-warning text-warning"><i className="fa fa-phone fa-fw"></i></span>
-          <input type="number" name="phoneNumber" className={`form-control border-warning bg-light text-white ${(touch.phoneNumber && errors.phoneNumber) ? 'is-invalid' : ''}`} placeholder="Company phoneNumber..."
+          <span className="input-group-text bg-white border-warning text-warning"><i className="fa fa-phone fa-fw"></i></span>
+          <input type="number" name="phoneNumber" className={`form-control border-warning bg-white text-light ${(touch.phoneNumber && errors.phoneNumber) ? 'is-invalid' : ''}`} placeholder="Company phoneNumber..."
             onBlur={handleBlur} onChange={handleChange} value={userBody.phoneNumber} />
           <div className="invalid-feedback">{errors.phoneNumber}</div>
         </div>
 
 
         <div className="d-grid">
-          <button className="btn btn-primary" type="submit" disabled={!isValid()}>Update Profile</button>
+          <button className="btn btn-warning" type="submit" disabled={!isValid()}>Update Profile</button>
         </div>
 
 
