@@ -50,25 +50,25 @@ function LoginForm() {
   const { user, errors } = state;
 
   return (
-    <form className="mt-3 mb-3" onSubmit={handleSubmit}>
+    <form className="mt-3 mb-3 pr-3 pt-3 pl-3 bg-white  border-warning rounded text-center" onSubmit={handleSubmit}>
 
       <div className="input-group mb-2">
-        <span className="input-group-text"><i className="fa fa-envelope fa-fw"></i></span>
-        <input type="email" name="email" className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+        <span className="input-group-text"><i className="fa fa-envelope fa-fw text-warning"></i></span>
+        <input type="email" name="email" className={`form-control ${errors.email ? 'is-invalid' : ''}`} style={{ color: 'dark !important'}}
           required placeholder="user@example.org" onChange={handleChange} value={user.email} />
         <div className="invalid-feedback">{errors.email}</div>
       </div>
 
-      <div className="input-group mb-2">
-        <span className="input-group-text"><i className="fa fa-lock fa-fw"></i></span>
+      <div className="input-group mb-4">
+        <span className="input-group-text"><i className="fa fa-lock fa-fw  text-warning"></i></span>
         <input type="password" name="password" className="form-control"
           required placeholder="Password" onChange={handleChange} value={user.password} />
       </div>
 
-      <div className="d-grid gap-2">
-        <button className="btn btn-primary" type="submit" >Login</button>
+      <div className="d-grid">
+        <button className="btn btn-warning" type="submit" >Login</button>
       </div>
-      <Link className="link-unstyled card-header" to={`/register`}><h6 className="card-title text-white">Aún no tienes cuenta? Regístrate.</h6></Link>
+      <Link className="btn btn-link link-unstyled " to={`/register`}><h6 className="text-warning">Aún no tienes cuenta? Regístrate.</h6></Link>
 
     </form>
   );

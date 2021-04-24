@@ -116,7 +116,7 @@ function EventsList({ minSearchChars, showFilter, companyId }) {
         <div className="container pt-4 pb-5 bg-transparent overflow auto" style={{ height: "800px", overflowY: "scroll" }}>
           {showFilter && (<EventsFilter className="mb-3" onSearch={handleSearch} loading={loading} />)}
 
-          <div className="row row-cols-2">
+          <div className="row row-cols-1">
             {listEvents && events.map(event => (
               <div key={event.id} className="col mb-4"><EventItem event={event} onDeleteEvent={handleDeleteEvent}></EventItem></div>
             ))}

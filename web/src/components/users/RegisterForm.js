@@ -49,7 +49,7 @@ function RegisterForm() {
       name: '',
       email: '',
       password: '',
-      role: ''
+      role: 'client'
 
     },
     errors: {
@@ -115,38 +115,38 @@ function RegisterForm() {
 
 
   return (
-    <form className="mt-3 mb-3" onSubmit={handleSubmit}>
+    <form className="mt-3 mb-3 pr-3 pt-3 pl-3 bg-white text-center  border-warning rounded " onSubmit={handleSubmit}>
       
       <div className="input-group mb-2">
-        <span className="input-group-text"><i className="fa fa-user fa-fw"></i></span>
+        <span className="input-group-text"><i className="fa fa-user fa-fw text-warning"></i></span>
         <input type="text" name="name" className={`form-control ${touch.name && errors.name ? 'is-invalid' : ''}`}
           placeholder="Username" onBlur={handleBlur} onChange={handleChange} value={user.name} />
         <div className="invalid-feedback">{errors.name}</div>
       </div>
 
       <div className="input-group mb-2">
-        <span className="input-group-text"><i className="fa fa-envelope fa-fw"></i></span>
+        <span className="input-group-text"><i className="fa fa-envelope fa-fw text-warning"></i></span>
         <input type="text" name="email" className={`form-control ${touch.email && errors.email ? 'is-invalid' : ''}`}
           placeholder="Email" onBlur={handleBlur} onChange={handleChange} value={user.email} />
         <div className="invalid-feedback">{errors.email}</div>
       </div>
 
-      <div className="input-group mb-2">
-        <span className="input-group-text"><i className="fa fa-lock fa-fw"></i></span>
+      <div className="input-group mb-3">
+        <span className="input-group-text"><i className="fa fa-lock fa-fw text-warning"></i></span>
         <input type="password" name="password" className={`form-control ${touch.password && errors.password ? 'is-invalid' : ''}`}
           placeholder="Password" onBlur={handleBlur} onChange={handleChange} value={user.password} />
         <div className="invalid-feedback">{errors.password}</div>
       </div>
-      <div className="custom-control custom-checkbox">
-          <input type="checkbox" className="custom-control-input" name="role" id="check1"  onBlur={handleBlur} onChange={handleChange} value='company'  disabled=""/>
-          <label className="custom-control-label" for="check1">{t('User.textToCompany')}</label>
+      <div className="custom-control custom-checkbox mb-4">
+          <input type="checkbox" className="custom-control-input color-light " name="role" id="check1"  onBlur={handleBlur} onChange={handleChange} value='company'  disabled=""/>
+          <label className="custom-control-label text-light text-caption" for="check1">{t('User.textToCompany')}</label>
         </div>
 
       <div className="d-grid gap-2">
-        <button className="btn btn-primary" type="submit" disabled={!isValid()}>Register</button>
+        <button className="btn btn-warning" type="submit" disabled={!isValid()}>Register</button>
       </div>
 
-      <Link className="link-unstyled card-header" to={`/login`}><h6 className="card-title text-white">Ya estoy registrado</h6></Link>
+      <Link className="btn btn-link link-unstyled text-center" to={`/login`}><h6 className="text-warning ">Ya estoy registrado</h6></Link>
 
 
 
