@@ -6,9 +6,6 @@ import { useHistory } from 'react-router';
 import { update } from '../../services/reservations-service';
 
 
-
-
-
 const Card = () => {
 
   const { user, reservation: { _id, numberOfPeople, price, eventName, date, client, event, paymentState }, thereIsReservation, onReservationChange } = useContext(AuthContext);

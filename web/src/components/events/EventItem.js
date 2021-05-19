@@ -84,9 +84,9 @@ function EventItem({ event: { id, name, description, city, image, company, date,
     <div className="card mb-3">
 
       <div className="card shadow-sm border-warning rounded  bg-white" style={{ color: "#171721" }} >
-        
-        
-        <h6 className="fw-lighter mt-3 ml-3 " style={{ fontSize: '12px' }}>{date.slice(0,10)}</h6>
+
+
+        <h6 className="fw-lighter mt-3 ml-3 " style={{ fontSize: '12px' }}>{date.slice(0, 10)}</h6>
         <h5 className="card-title mt-1 ml-3 mr-2" >{name}, {city}</h5>
 
         <img src={image} className="card-img-top" alt={name} style={{ height: "20rem" }} />
@@ -99,13 +99,13 @@ function EventItem({ event: { id, name, description, city, image, company, date,
 
           <form onSubmit={handleSubmit}>
 
-            <div className="btn-group ml-4 mr-4 mb-4 d-flex justify-content-center" style= {{ borderStyle: "solid" , borderWidth: '1px' , borderColor: '#000000'}} >
-            <span className="input-group-text bg-white text-light"> {price}€/person </span>         
+            <div className="btn-group ml-4 mr-4 mb-4 d-flex justify-content-center" style={{ borderStyle: "solid", borderWidth: '1px', borderColor: '#000000' }} >
+              <span className="input-group-text bg-white text-light"> {price}€/person </span>
 
               <span className="input-group-text bg-white"> <i className="fa fa-user fa-fw" style={{ color: "#171721" }}></i></span>
               <input name="numberOfPeople" type="number" className="input-group-text bg-white text-light" style={{ width: "80px" }}
                 value={reservation.numberOfPeople} onBlur={handleBlur} onChange={handleChange} />
-            <Link className="mt-2 d-flex align-items-center" to={{ pathname: `mail://${company.email}`}} target="_blank"><h6 className="card-title text-ligth">{company.email}</h6></Link>
+              <Link className="mt-2 d-flex align-items-center" to={{ pathname: `mail://${company.email}` }} target="_blank"><h6 className="card-title text-ligth">{company.email}</h6></Link>
 
             </div>
             <div className="d-grid">

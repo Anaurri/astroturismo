@@ -69,7 +69,7 @@ const userSchema = new Schema({
 }, {
     timestamps: true,
 
-    /*Para el postman: son métodos de la clase Hash para poder usar el postman y que no falle*/
+    /*Para el postman: son métodos de la clase Hash para poder usar el postman*/
     toJSON: {
         transform: (doc, ret) => {
             ret.id = doc._id;

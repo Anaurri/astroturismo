@@ -3,7 +3,7 @@ npm install react-google-maps  --legacy-peer-deps  ( la hemos tenido que instala
 no significa que vaya a fallar, puede ser que no se haya probado en esta nueva versión)
 
 
-VOy a https://console.cloud.google.com/
+Voy a https://console.cloud.google.com/
 ME creo un nuevo proyecto : astroturismo 
 
 Me voy a + HABILITAR  API y SERVICIOS Y BUSCO google maps : Elijo la opción Maps javascript api y la habilitamos.

@@ -30,7 +30,7 @@ npx create-react-app web
 
 
   }
-ESTAS DOS DEPENDENCIAS LAS HE TENIDO QUE INSTALAR ASI ( con legacy-peer-deps porque había conflicto con mi versión de React. ESto no significa que no vaya a funcionar, 
+ESTAS DOS DEPENDENCIAS LAS HE TENIDO QUE INSTALAR ASI ( con legacy-peer-deps porque había conflicto con mi versión de React. Esto no significa que no vaya a funcionar, 
 suele ser debido a que no se ha probado bien la librería en la nueva versión de REact )
 
 
